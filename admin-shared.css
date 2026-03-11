@@ -41,8 +41,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   display: flex;
-  height: 100vh;
-  overflow: hidden;
+  min-height:100vh
 }
 
 /* ── PAGE TRANSITION ── */
@@ -74,6 +73,7 @@ body {
   padding: 0;
   z-index: 50;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .sidebar-overlay{
