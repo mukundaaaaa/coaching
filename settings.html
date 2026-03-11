@@ -105,9 +105,6 @@
   </div>
 
 </div>
-    <div class="topbar-right">
-      <span class="topbar-date" id="topbarDate">📅</span>
-    </div>
   </div>
 
   <div class="page-content">
@@ -290,8 +287,6 @@ function showToast(msg) {
   t.style.opacity = '1';
   setTimeout(() => t.style.opacity = '0', 2500);
 }
-document.getElementById('topbarDate').textContent =
-  '📅 ' + new Date().toLocaleDateString('en-IN', {weekday:'short',day:'numeric',month:'short',year:'numeric'});
 </script>
 
 <script>
