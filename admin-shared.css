@@ -526,11 +526,30 @@ body {
 /* ════════════════════════
    RESPONSIVE
 ═════════════════════════ */
-@media (max-width: 900px) {
+
+.menu-toggle{
+  display:none;
+}
+@media (max-width: 768px) {
 
   .menu-toggle{
-    display:flex;
-  }
+  display:flex;
+
+  width:36px;
+  height:36px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:white;
+
+  font-size:18px;
+  cursor:pointer;
+
+  align-items:center;
+  justify-content:center;
+
+  transition:all 0.2s ease;
+}
+
 
   .sidebar{
     position:fixed;
