@@ -94,21 +94,17 @@
   </div>
 
 </div>
-    <div class="topbar-right">
-      <span class="topbar-date" id="topbarDate">📅</span>
-    </div>
   </div>
+    <div class="page-content">
 
-  <div class="page-content">
-
-    <div class="panel" style="margin-bottom:24px;">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title">Course Overview</div>
-          <div class="panel-subtitle">3 active courses</div>
+      <div class="panel" style="margin-bottom:24px;">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Course Overview</div>
+            <div class="panel-subtitle">3 active courses</div>
+          </div>
         </div>
       </div>
-    </div>
 
     <div class="course-grid stagger">
 
@@ -178,10 +174,6 @@
   </div>
 </div>
 
-<script>
-document.getElementById('topbarDate').textContent =
-  '📅 ' + new Date().toLocaleDateString('en-IN', {weekday:'short',day:'numeric',month:'short',year:'numeric'});
-</script>
 
 <script>
 function toggleSidebar(){
