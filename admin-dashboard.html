@@ -76,7 +76,6 @@
 
 </div>
     <div class="topbar-right">
-      <span class="topbar-date" id="topbarDate">📅 Loading…</span>
       <a href="enrollments.html" class="btn btn-primary">+ New Enrollment</a>
     </div>
   </div>
@@ -168,13 +167,6 @@
   </div>
 </div>
 
-<script>
-  // Date
-  const d = new Date();
-  document.getElementById('topbarDate').textContent =
-    '📅 ' + d.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
-
-</script>
 
 <script>
 function toggleSidebar(){
