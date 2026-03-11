@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — PRAJNANAM Admin</title>
+  <link rel="stylesheet" href="admin-shared.css"/>
+</head>
+<body>
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <a href="admin-dashboard.html" class="sidebar-logo">
+      <div class="sidebar-logo-mark">प्र</div>
+      <div class="sidebar-logo-text">
+        <span class="sidebar-logo-name">PRAJNANAM</span>
+        <span class="sidebar-logo-sub">E-Pathsala</span>
+      </div>
+    </a>
+    <div class="sidebar-badge"><div class="sidebar-badge-dot"></div> Admin Panel</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <a href="admin-dashboard.html" class="active">
+      <span class="nav-icon">📊</span> Dashboard
+    </a>
+    <a href="enrollments.html">
+      <span class="nav-icon">📋</span> Enrollments
+    </a>
+    <a href="courses.html">
+      <span class="nav-icon">📚</span> Courses
+    </a>
+    <div class="nav-section-label">People</div>
+    <a href="faculty.html">
+      <span class="nav-icon">👨‍🏫</span> Faculty
+    </a>
+    <div class="nav-section-label">System</div>
+    <a href="settings.html">
+      <span class="nav-icon">⚙️</span> Settings
+    </a>
+    <a href="index.html">
+      <span class="nav-icon">🌐</span> View Website
+    </a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="user-avatar">A</div>
+      <div class="user-info">
+        <div class="user-name">Admin</div>
+        <div class="user-role">Super Administrator</div>
+      </div>
+      <button class="user-logout" onclick="confirmLogout()" title="Logout">
+        <span>🚪</span>
+        </button>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- ── MAIN ── -->
+<div class="main">
+
+  <div class="topbar">
+    <div class="topbar-left">
+
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+  <div class="topbar-title-group">
+    <span class="topbar-breadcrumb">Admin Panel</span>
+    <span class="topbar-title">Dashboard</span>
+  </div>
+
+</div>
+    <div class="topbar-right">
+      <span class="topbar-date" id="topbarDate">📅 Loading…</span>
+      <a href="enrollments.html" class="btn btn-primary">+ New Enrollment</a>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- Stats -->
+    <div class="stats-grid stagger">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-label">Total Enrollments</div>
+        <div class="stat-value">124</div>
+        <div class="stat-sub stat-trend trend-up">↑ 8 this week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📘</div>
+        <div class="stat-label">Class 10</div>
+        <div class="stat-value">40</div>
+        <div class="stat-sub">Foundation Batch</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🔬</div>
+        <div class="stat-label">Class 12 Science</div>
+        <div class="stat-value">52</div>
+        <div class="stat-sub">PCM / PCB</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📜</div>
+        <div class="stat-label">Class 12 Arts</div>
+        <div class="stat-value">32</div>
+        <div class="stat-sub">All Subjects</div>
+      </div>
+    </div>
+
+    <!-- Recent Enrollments -->
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Recent Enrollments</div>
+          <div class="panel-subtitle">Latest student registrations</div>
+        </div>
+        <div>
+      <a href="enrollments.html" class="btn btn-outline">View All →</a>
+    </div>
+      </div>
+      <table class="data-table" id="enrollTable">
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Phone</th>
+            <th>Course</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="avatar-cell"><div class="table-avatar">R</div><div><div class="table-name">Rahul Das</div><div class="table-sub">Class 12 Science</div></div></div></td>
+            <td>98765 43210</td>
+            <td><span class="badge badge-science">Class 12 Science</span></td>
+            <td>12 Mar 2026</td>
+            <td><span class="badge badge-green">Active</span></td>
+          </tr>
+          <tr>
+            <td><div class="avatar-cell"><div class="table-avatar" style="background:linear-gradient(135deg,#5B8DB8,#7EB3D8);">A</div><div><div class="table-name">Ankit Paul</div><div class="table-sub">Class 10</div></div></div></td>
+            <td>60012 34567</td>
+            <td><span class="badge badge-ten">Class 10</span></td>
+            <td>12 Mar 2026</td>
+            <td><span class="badge badge-green">Active</span></td>
+          </tr>
+          <tr>
+            <td><div class="avatar-cell"><div class="table-avatar" style="background:linear-gradient(135deg,#C9922A,#E8B94A);">P</div><div><div class="table-name">Priya Roy</div><div class="table-sub">Class 12 Arts</div></div></div></td>
+            <td>70012 34567</td>
+            <td><span class="badge badge-arts">Class 12 Arts</span></td>
+            <td>11 Mar 2026</td>
+            <td><span class="badge badge-green">Active</span></td>
+          </tr>
+          <tr>
+            <td><div class="avatar-cell"><div class="table-avatar">S</div><div><div class="table-name">Sneha Das</div><div class="table-sub">Class 12 Science</div></div></div></td>
+            <td>91234 56789</td>
+            <td><span class="badge badge-science">Class 12 Science</span></td>
+            <td>10 Mar 2026</td>
+            <td><span class="badge badge-muted">Inactive</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Date
+  const d = new Date();
+  document.getElementById('topbarDate').textContent =
+    '📅 ' + d.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+
+</script>
+
+<script>
+function toggleSidebar(){
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+
+  sidebar.classList.toggle('open');
+
+  if(overlay){
+    overlay.classList.toggle('show');
+  }
+}
+
+</script>
+
+<script>
+function confirmLogout() {
+
+  const logout = confirm("Are you sure you want to logout?");
+
+  if(logout){
+    window.location.href = "login.html";
+  }
+
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enrollments — PRAJNANAM Admin</title>
+  <link rel="stylesheet" href="admin-shared.css"/>
+  <style>
+    .filter-tabs { display:flex; gap:8px; flex-wrap:wrap; }
+    .filter-tab {
+      padding:6px 14px; border-radius:100px; font-size:12px; font-weight:600;
+      cursor:pointer; border:1.5px solid var(--border); background:white;
+      color:var(--muted); transition:all 0.2s; font-family:'DM Sans',sans-serif;
+    }
+    .filter-tab.active, .filter-tab:hover {
+      background:var(--saffron-dim); border-color:var(--saffron); color:var(--saffron);
+    }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <a href="admin-dashboard.html" class="sidebar-logo">
+      <div class="sidebar-logo-mark">प्र</div>
+      <div class="sidebar-logo-text">
+        <span class="sidebar-logo-name">PRAJNANAM</span>
+        <span class="sidebar-logo-sub">E-Pathsala</span>
+      </div>
+    </a>
+    <div class="sidebar-badge"><div class="sidebar-badge-dot"></div> Admin Panel</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <a href="admin-dashboard.html"><span class="nav-icon">📊</span> Dashboard</a>
+    <a href="enrollments.html" class="active"><span class="nav-icon">📋</span> Enrollments</a>
+    <a href="courses.html"><span class="nav-icon">📚</span> Courses</a>
+    <div class="nav-section-label">People</div>
+    <a href="faculty.html"><span class="nav-icon">👨‍🏫</span> Faculty</a>
+    <div class="nav-section-label">System</div>
+    <a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a>
+    <a href="index.html"><span class="nav-icon">🌐</span> View Website</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="user-avatar">A</div>
+      <div class="user-info"><div class="user-name">Admin</div><div class="user-role">Super Administrator</div></div>
+      <button class="user-logout" onclick="confirmLogout()" title="Logout">
+        <span>🚪</span>
+        </button>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+  <div class="topbar-title-group">
+    <span class="topbar-breadcrumb">Admin Panel</span>
+    <span class="topbar-title">Enrollments</span>
+  </div>
+
+</div>
+    <div class="topbar-right">
+      <span class="topbar-date" id="topbarDate">📅</span>
+      <button class="btn btn-primary" onclick="alert('Add enrollment form — coming soon!')">+ Add Enrollment</button>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- Summary cards -->
+    <div class="stats-grid stagger" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px;">
+      <div class="stat-card">
+        <div class="stat-label">Total</div>
+        <div class="stat-value">124</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Class 10</div>
+        <div class="stat-value">40</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Class 12 Science</div>
+        <div class="stat-value">52</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Class 12 Arts</div>
+        <div class="stat-value">32</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header" style="flex-wrap:wrap;gap:12px;">
+        <div>
+          <div class="panel-title">All Enrollments</div>
+          <div class="panel-subtitle">Manage and view student enrollments</div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <div class="filter-tabs" id="filterTabs">
+            <button class="filter-tab active" onclick="setFilter('all',this)">All</button>
+            <button class="filter-tab" onclick="setFilter('Class 10',this)">Class 10</button>
+            <button class="filter-tab" onclick="setFilter('Science',this)">Class 12 Science</button>
+            <button class="filter-tab" onclick="setFilter('Arts',this)">Class 12 Arts</button>
+          </div>
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search…" oninput="filterEnroll(this.value)"/>
+          </div>
+        </div>
+      </div>
+
+      <table class="data-table" id="eTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Student</th>
+            <th>Phone</th>
+            <th>Course</th>
+            <th>Enrolled On</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="eBody">
+          <!-- JS rendered -->
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const enrollments = [
+  { id:1, name:'Rahul Das',     phone:'98765 43210', course:'Class 12 Science', date:'12 Mar 2026', status:'Active' },
+  { id:2, name:'Ankit Paul',    phone:'60012 34567', course:'Class 10',          date:'12 Mar 2026', status:'Active' },
+  { id:3, name:'Priya Roy',     phone:'70012 34567', course:'Class 12 Arts',     date:'11 Mar 2026', status:'Active' },
+  { id:4, name:'Sneha Das',     phone:'91234 56789', course:'Class 12 Science',  date:'10 Mar 2026', status:'Inactive' },
+  { id:5, name:'Riya Sharma',   phone:'87654 32109', course:'Class 10',          date:'09 Mar 2026', status:'Active' },
+  { id:6, name:'Mohan Gupta',   phone:'99887 76655', course:'Class 12 Arts',     date:'08 Mar 2026', status:'Active' },
+  { id:7, name:'Aisha Khan',    phone:'76543 21098', course:'Class 12 Science',  date:'07 Mar 2026', status:'Inactive' },
+];
+
+const colors = ['', 'background:linear-gradient(135deg,#5B8DB8,#7EB3D8)', 'background:linear-gradient(135deg,#C9922A,#E8B94A)', '', 'background:linear-gradient(135deg,#5B4E9E,#8B7EC8)', '', ''];
+const badgeClass = c => c.includes('Science') ? 'badge-science' : c.includes('Arts') ? 'badge-arts' : 'badge-ten';
+
+let currentFilter = 'all';
+
+function render(data) {
+  const tbody = document.getElementById('eBody');
+  tbody.innerHTML = data.map((e,i) => `
+    <tr>
+      <td style="color:var(--muted);font-size:13px;">${String(e.id).padStart(2,'0')}</td>
+      <td>
+        <div class="avatar-cell">
+          <div class="table-avatar" style="${colors[i] || ''}">${e.name[0]}</div>
+          <div><div class="table-name">${e.name}</div></div>
+        </div>
+      </td>
+      <td style="font-size:13px;color:var(--muted);">${e.phone}</td>
+      <td><span class="badge ${badgeClass(e.course)}">${e.course}</span></td>
+      <td style="font-size:13px;">${e.date}</td>
+      <td><span class="badge ${e.status==='Active'?'badge-green':'badge-muted'}">${e.status}</span></td>
+      <td class="actions-cell">
+      <button class="btn-icon" title="Edit">✏️</button>
+      <button class="btn-icon btn-danger" title="Delete">🗑</button>
+    </td>
+    </tr>`).join('');
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function filterEnroll(q) {
+  applyFilters(q);
+}
+
+function applyFilters(q = '') {
+  const filtered = enrollments.filter(e =>
+    (currentFilter === 'all' || e.course.includes(currentFilter)) &&
+    (e.name.toLowerCase().includes(q.toLowerCase()) || e.phone.includes(q))
+  );
+  render(filtered);
+}
+
+render(enrollments);
+
+document.getElementById('topbarDate').textContent =
+  '📅 ' + new Date().toLocaleDateString('en-IN', {weekday:'short',day:'numeric',month:'short',year:'numeric'});
+</script>
+<script>
+function toggleSidebar(){
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+
+  sidebar.classList.toggle('open');
+
+  if(overlay){
+    overlay.classList.toggle('show');
+  }
+}
+
+</script>
+
+<script>
+function confirmLogout() {
+
+  const logout = confirm("Are you sure you want to logout?");
+
+  if(logout){
+    window.location.href = "login.html";
+  }
+
+}
+</script>
+
+</body>
+</html>

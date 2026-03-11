@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Courses — PRAJNANAM Admin</title>
+  <link rel="stylesheet" href="admin-shared.css"/>
+  <style>
+    .course-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+    .course-card {
+      background:white; border-radius:var(--radius-lg); border:1px solid var(--border);
+      box-shadow:var(--shadow-sm); overflow:hidden; transition:all 0.25s;
+    }
+    .course-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+    .course-card-top { padding:22px 22px 18px; position:relative; }
+    .course-card-top::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:4px;
+    }
+    .cc-science::before { background:linear-gradient(90deg,var(--saffron),var(--gold)); }
+    .cc-arts::before    { background:linear-gradient(90deg,var(--gold),#e8b94a); }
+    .cc-ten::before     { background:linear-gradient(90deg,#5B8DB8,#7EB3D8); }
+    .course-card-icon { font-size:32px; margin-bottom:12px; }
+    .course-card-class { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
+    .course-card-name { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--deep); margin-bottom:10px; }
+    .subject-chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+    .subject-chip {
+      font-size:11px; font-weight:600; padding:3px 10px; border-radius:6px;
+      background:var(--saffron-pale); color:var(--saffron);
+    }
+    .subject-chip.arts { background:rgba(201,146,42,0.1); color:var(--gold); }
+    .subject-chip.ten  { background:rgba(91,141,184,0.12); color:#4A7FA8; }
+    .course-card-bottom {
+      padding:14px 22px; border-top:1px solid var(--border);
+      display:flex; justify-content:space-between; align-items:center;
+      background:var(--bg);
+    }
+    .enrolled-count { font-size:13px; color:var(--muted); font-weight:500; }
+    .enrolled-count strong { color:var(--deep); font-weight:700; }
+    .coming-soon-card { opacity:0.65; }
+    .coming-soon-badge {
+      display:inline-flex; align-items:center; gap:5px;
+      background:rgba(26,18,8,0.06); color:var(--muted);
+      border:1px dashed var(--border-strong); padding:3px 10px;
+      border-radius:100px; font-size:11px; font-weight:600;
+    }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <a href="admin-dashboard.html" class="sidebar-logo">
+      <div class="sidebar-logo-mark">प्र</div>
+      <div class="sidebar-logo-text">
+        <span class="sidebar-logo-name">PRAJNANAM</span>
+        <span class="sidebar-logo-sub">E-Pathsala</span>
+      </div>
+    </a>
+    <div class="sidebar-badge"><div class="sidebar-badge-dot"></div> Admin Panel</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <a href="admin-dashboard.html"><span class="nav-icon">📊</span> Dashboard</a>
+    <a href="enrollments.html"><span class="nav-icon">📋</span> Enrollments</a>
+    <a href="courses.html" class="active"><span class="nav-icon">📚</span> Courses</a>
+    <div class="nav-section-label">People</div>
+    <a href="faculty.html"><span class="nav-icon">👨‍🏫</span> Faculty</a>
+    <div class="nav-section-label">System</div>
+    <a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a>
+    <a href="index.html"><span class="nav-icon">🌐</span> View Website</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="user-avatar">A</div>
+      <div class="user-info"><div class="user-name">Admin</div><div class="user-role">Super Administrator</div></div>
+      <button class="user-logout" onclick="confirmLogout()" title="Logout">
+        <span>🚪</span>
+        </button>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+  <div class="topbar-title-group">
+    <span class="topbar-breadcrumb">Admin Panel</span>
+    <span class="topbar-title">Courses</span>
+  </div>
+
+</div>
+    <div class="topbar-right">
+      <span class="topbar-date" id="topbarDate">📅</span>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <div class="panel" style="margin-bottom:24px;">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Course Overview</div>
+          <div class="panel-subtitle">3 active courses</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-grid stagger">
+
+      <!-- Class 12 Science -->
+      <div class="course-card">
+        <div class="course-card-top cc-science">
+          <div class="course-card-icon">🔬</div>
+          <div class="course-card-class">Class XII · Science</div>
+          <div class="course-card-name">Science Stream<br/>Complete Batch</div>
+          <div class="subject-chips">
+            <span class="subject-chip">Physics</span>
+            <span class="subject-chip">Chemistry</span>
+            <span class="subject-chip">Mathematics</span>
+            <span class="subject-chip">Biology</span>
+            <span class="subject-chip">English</span>
+          </div>
+        </div>
+        <div class="course-card-bottom">
+          <span class="enrolled-count"><strong>52</strong> students enrolled</span>
+          <div style="display:flex;gap:6px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Class 12 Arts -->
+      <div class="course-card">
+        <div class="course-card-top cc-arts">
+          <div class="course-card-icon">📜</div>
+          <div class="course-card-class">Class XII · Arts</div>
+          <div class="course-card-name">Arts Stream<br/>Complete Batch</div>
+          <div class="subject-chips">
+            <span class="subject-chip arts">History</span>
+            <span class="subject-chip arts">Political Science</span>
+            <span class="subject-chip arts">Geography</span>
+            <span class="subject-chip arts">Economics</span>
+            <span class="subject-chip arts">English</span>
+          </div>
+        </div>
+        <div class="course-card-bottom">
+          <span class="enrolled-count"><strong>32</strong> students enrolled</span>
+          <div style="display:flex;gap:6px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Class 10 -->
+      <div class="course-card">
+        <div class="course-card-top cc-ten">
+          <div class="course-card-icon">📘</div>
+          <div class="course-card-class">Class X</div>
+          <div class="course-card-name">Class 10<br/>Foundation Batch</div>
+          <div class="subject-chips">
+            <span class="subject-chip ten">Mathematics</span>
+            <span class="subject-chip ten">Science</span>
+            <span class="subject-chip ten">Social Science</span>
+            <span class="subject-chip ten">English</span>
+            <span class="subject-chip ten">Hindi</span>
+          </div>
+        </div>
+        <div class="course-card-bottom">
+          <span class="enrolled-count"><strong>40</strong> students enrolled</span>
+          <div style="display:flex;gap:6px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('topbarDate').textContent =
+  '📅 ' + new Date().toLocaleDateString('en-IN', {weekday:'short',day:'numeric',month:'short',year:'numeric'});
+</script>
+
+<script>
+function toggleSidebar(){
+  const sidebar = document.querySelector('.sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+
+  sidebar.classList.toggle('open');
+
+  if(overlay){
+    overlay.classList.toggle('show');
+  }
+}
+
+</script>
+
+<script>
+function confirmLogout() {
+
+  const logout = confirm("Are you sure you want to logout?");
+
+  if(logout){
+    window.location.href = "login.html";
+  }
+
+}
+</script>
+
+</body>
+</html>
