@@ -6,11 +6,25 @@
   <title>Enrollments — PRAJNANAM Admin</title>
   <link rel="stylesheet" href="admin-shared.css"/>
   <style>
-    .filter-tabs { display:flex; gap:8px; flex-wrap:wrap; }
+    .filter-tabs{
+      display:flex;
+      gap:8px;
+      padding-bottom:6px;
+      margin-bottom:6px;
+      overflow-x:auto;
+      flex-wrap:nowrap;
+      white-space:nowrap;
+      width:100%;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    .filter-tabs::-webkit-scrollbar{
+      display:none;
+    }
     .filter-tab {
       padding:6px 14px; border-radius:100px; font-size:12px; font-weight:600;
       cursor:pointer; border:1.5px solid var(--border); background:white;
-      color:var(--muted); transition:all 0.2s; font-family:'DM Sans',sans-serif;
+      color:var(--muted); transition:all 0.2s; font-family:'DM Sans',sans-serif;flex:0 0 auto;
     }
     .filter-tab.active, .filter-tab:hover {
       background:var(--saffron-dim); border-color:var(--saffron); color:var(--saffron);
@@ -74,7 +88,7 @@
   <div class="page-content">
 
     <!-- Summary cards -->
-    <div class="stats-grid stagger" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px;">
+    <div class="stats-grid stagger" style="margin-bottom:24px;">
       <div class="stat-card">
         <div class="stat-label">Total</div>
         <div class="stat-value">124</div>
@@ -99,7 +113,8 @@
           <div class="panel-title">All Enrollments</div>
           <div class="panel-subtitle">Manage and view student enrollments</div>
         </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+        <div style="display:flex;gap:10px;align-items:center;width:100%;">
+
           <div class="filter-tabs" id="filterTabs">
             <button class="filter-tab active" onclick="setFilter('all',this)">All</button>
             <button class="filter-tab" onclick="setFilter('Class 10',this)">Class 10</button>
