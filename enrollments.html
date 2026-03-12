@@ -114,17 +114,18 @@
           <div class="panel-subtitle">Manage and view student enrollments</div>
         </div>
         <div style="display:flex;gap:10px;align-items:center;width:100%;">
-
+            <div class="enrollment-controls">
           <div class="filter-tabs" id="filterTabs">
-            <button class="filter-tab active" onclick="setFilter('all',this)">All</button>
-            <button class="filter-tab" onclick="setFilter('Class 10',this)">Class 10</button>
-            <button class="filter-tab" onclick="setFilter('Science',this)">Class 12 Science</button>
-            <button class="filter-tab" onclick="setFilter('Arts',this)">Class 12 Arts</button>
-          </div>
+    <button class="filter-tab active" onclick="setFilter('all',this)">All</button>
+    <button class="filter-tab" onclick="setFilter('Class 10',this)">Class 10</button>
+    <button class="filter-tab" onclick="setFilter('Science',this)">Class 12 Science</button>
+    <button class="filter-tab" onclick="setFilter('Arts',this)">Class 12 Arts</button>
+  </div>
           <div class="search-bar">
-            <span class="search-icon">🔍</span>
-            <input type="text" placeholder="Search…" oninput="filterEnroll(this.value)"/>
-          </div>
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search…" oninput="filterEnroll(this.value)">
+        </div>
+            </div>
         </div>
       </div>
 
