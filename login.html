@@ -60,6 +60,23 @@ border-radius:14px;
 box-shadow:0 30px 80px rgba(0,0,0,0.08);
 }
 
+.forgot-password{
+text-align:right;
+}
+
+.forgot-password a{
+font-size:12px;
+color:#E8651A;
+text-decoration:none;
+font-weight:500;
+}
+
+.forgot-password a:hover{
+text-decoration:underline;
+}
+
+
+
 .logo{
 text-align:center;
 font-family:'Playfair Display',serif;
@@ -174,6 +191,11 @@ margin-top:10px;
 
 <button type="submit">Login</button>
 
+<div class="forgot-password">
+  <a href="#" onclick="forgotPassword()">Forgot password?</a>
+</div>
+
+
 <div class="message" id="loginMsg"></div>
 
 </form>
@@ -182,21 +204,34 @@ margin-top:10px;
 <!-- CREATE ACCOUNT -->
 <form id="registerForm">
 
-<input type="text" placeholder="Name">
+<input type="text" placeholder="Name" required>
 
-<input type="text" placeholder="Phone Number">
+<input type="text" placeholder="Phone Number" required>
+
+<input type="email" placeholder="Email Address" required>
 
 <div class="password-box">
-  <input type="password" id="registerPassword" placeholder="Password">
+  <input type="password" id="registerPassword" placeholder="Password" required>
 
   <svg id="eyeIconRegister" class="toggle-eye" onclick="toggleRegisterPassword()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9aa0a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
     <circle cx="12" cy="12" r="3"></circle>
   </svg>
-
 </div>
 
-<button type="button">Create Account</button>
+<div class="password-box">
+  <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+
+  <svg id="eyeIconConfirm" class="toggle-eye" onclick="toggleConfirmPassword()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9aa0a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+    <circle cx="12" cy="12" r="3"></circle>
+  </svg>
+</div>
+
+
+<button type="button" onclick="createAccount()">Create Account</button>
+
+<div class="message" id="registerMsg"></div>
 
 <div class="note">
 Account creation will use OTP verification later.
@@ -204,9 +239,31 @@ Account creation will use OTP verification later.
 
 </form>
 
+
 </div>
 
 <script>
+
+function createAccount(){
+
+const password = document.getElementById("registerPassword").value;
+const confirmPassword = document.getElementById("confirmPassword").value;
+const msg = document.getElementById("registerMsg");
+
+if(password !== confirmPassword){
+msg.innerText = "Passwords do not match";
+return;
+}
+
+msg.style.color = "green";
+msg.innerText = "Account created successfully (demo)";
+
+}
+
+function forgotPassword(){
+alert("Password reset feature will be added with OTP verification.");
+}
+
 
 function toggleRegisterPassword(){
 
@@ -219,6 +276,21 @@ icon.style.stroke="#E8651A";
 }else{
 password.type="password";
 icon.style.stroke="#9aa0a6";
+}
+
+}
+
+function toggleConfirmPassword(){
+
+const password = document.getElementById("confirmPassword");
+const icon = document.getElementById("eyeIconConfirm");
+
+if(password.type === "password"){
+password.type = "text";
+icon.style.stroke = "#E8651A";
+}else{
+password.type = "password";
+icon.style.stroke = "#9aa0a6";
 }
 
 }
