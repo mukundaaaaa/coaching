@@ -118,112 +118,109 @@
         <span class="settings-nav-icon">📞</span> Contact
       </a>
         <a onclick="showSection('account',this)"><span class="settings-nav-icon">🔐</span> Account</a>
-        <a onclick="showSection('notifications',this)"><span class="settings-nav-icon">🔔</span> Notifications</a>
       </div>
 
       <div>
 
-        <!-- Contact -->
         <div class="panel settings-section visible" id="section-contact">
-          <div class="panel-header">
-            <div><div class="panel-title">Contact Details</div><div class="panel-subtitle">Shown on the website and in emails</div></div>
-          </div>
-          <div class="panel-body">
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input class="form-input" type="email" value="infoprajnanam@gmail.com"/>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Phone Number</label>
-                <input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX"/>
-              </div>
-            </div>
-            <div class="save-bar">
-              <button class="btn btn-ghost">Cancel</button>
-              <button class="btn btn-primary" onclick="showToast('Contact info saved!')">💾 Save Changes</button>
-            </div>
-          </div>
-        </div>
+  <div class="panel-header">
+    <div>
+      <div class="panel-title">Contact Details</div>
+      <div class="panel-subtitle">Shown on the website</div>
+    </div>
+  </div>
+
+  <div class="panel-body">
+
+    <!-- EMAIL -->
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <div style="display:flex;gap:10px;">
+        <input id="contactEmail" class="form-input" type="email" value="infoprajnanam@gmail.com"/>
+        <button class="btn btn-primary" onclick="updateField('Email')">Update</button>
+      </div>
+    </div>
+
+    <!-- PHONE -->
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <div style="display:flex;gap:10px;">
+        <input id="contactPhone" class="form-input" type="tel" placeholder="XXXXX XXXXX"/>
+        <button class="btn btn-primary" onclick="updateField('Phone')">Update</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
         <!-- Account -->
         <div class="panel settings-section" id="section-account">
-          <div class="panel-header">
-            <div><div class="panel-title">Account &amp; Security</div><div class="panel-subtitle">Manage admin credentials</div></div>
-          </div>
-          <div class="panel-body">
-            <div class="form-group">
-              <label class="form-label">Admin Name</label>
-              <input class="form-input" type="text" value="Admin"/>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Admin Email</label>
-              <input class="form-input" type="email" value="admin@prajnanam.in"/>
-            </div>
-            <div class="divider"></div>
-            <div class="form-group">
-              <label class="form-label">Current Password</label>
-              <input class="form-input" type="password" placeholder="Enter current password"/>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">New Password</label>
-                <input class="form-input" type="password" placeholder="New password"/>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Confirm Password</label>
-                <input class="form-input" type="password" placeholder="Confirm new password"/>
-              </div>
-            </div>
-            <div class="save-bar">
-              <button class="btn btn-ghost">Cancel</button>
-              <button class="btn btn-primary" onclick="showToast('Password updated!')">🔐 Update Password</button>
-            </div>
-          </div>
-        </div>
+  <div class="panel-header">
+    <div>
+      <div class="panel-title">Account Settings</div>
+      <div class="panel-subtitle">Manage admin details</div>
+    </div>
+  </div>
 
-        <!-- Notifications -->
-        <div class="panel settings-section" id="section-notifications">
-          <div class="panel-header">
-            <div><div class="panel-title">Notifications</div><div class="panel-subtitle">Control what alerts you receive</div></div>
-          </div>
-          <div class="panel-body">
-            <div class="toggle-row">
-              <div class="toggle-info">
-                <div class="toggle-label">New Enrollment Alerts</div>
-                <div class="toggle-desc">Get notified when a student enrolls</div>
-              </div>
-              <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
-            </div>
-            <div class="toggle-row">
-              <div class="toggle-info">
-                <div class="toggle-label">Payment Confirmations</div>
-                <div class="toggle-desc">Email when payment is received</div>
-              </div>
-              <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
-            </div>
-            <div class="toggle-row">
-              <div class="toggle-info">
-                <div class="toggle-label">Weekly Summary</div>
-                <div class="toggle-desc">Weekly digest of enrollments and activity</div>
-              </div>
-              <label class="toggle"><input type="checkbox"/><span class="toggle-slider"></span></label>
-            </div>
-            <div class="toggle-row">
-              <div class="toggle-info">
-                <div class="toggle-label">Student Reviews</div>
-                <div class="toggle-desc">Alert when a student submits a review</div>
-              </div>
-              <label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label>
-            </div>
-            <div class="save-bar">
-              <button class="btn btn-primary" onclick="showToast('Notification preferences saved!')">💾 Save</button>
-            </div>
-          </div>
-        </div>
+  <div class="panel-body">
 
+    <!-- NAME -->
+    <div class="form-group">
+      <label class="form-label">Admin Name</label>
+      <div style="display:flex;gap:10px;">
+        <input id="adminName" class="form-input" type="text" value="Admin"/>
+        <button class="btn btn-primary" onclick="updateField('Name')">Update</button>
       </div>
     </div>
+
+    <!-- EMAIL -->
+    <div class="form-group">
+      <label class="form-label">Admin Email</label>
+      <div style="display:flex;gap:10px;">
+        <input id="adminEmail" class="form-input" type="email" value="admin@prajnanam.in"/>
+        <button class="btn btn-primary" onclick="updateField('Admin Email')">Update</button>
+      </div>
+    </div>
+
+    <!-- PHONE -->
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <div style="display:flex;gap:10px;">
+        <input id="adminPhone" class="form-input" type="tel" placeholder="XXXXX XXXXX"/>
+        <button class="btn btn-primary" onclick="updateField('Phone')">Update</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PASSWORD SECTION -->
+    <div class="form-group">
+      <label class="form-label">Current Password</label>
+      <input id="currentPass" class="form-input" type="password" placeholder="Enter current password"/>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">New Password</label>
+        <input id="newPass" class="form-input" type="password" placeholder="New password"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm Password</label>
+        <input id="confirmPass" class="form-input" type="password" placeholder="Confirm password"/>
+      </div>
+    </div>
+
+    <div class="save-bar">
+      <button class="btn btn-primary" onclick="updatePassword()">🔐 Update Password</button>
+    </div>
+
+    <!-- FORGOT PASSWORD -->
+    <div style="margin-top:15px;text-align:right;">
+      <a href="#" onclick="forgotPassword()" style="font-size:12px;color:var(--saffron);text-decoration:none;">
+        Forgot Password?
+      </a>
+    </div>
+
   </div>
 </div>
 
@@ -244,6 +241,95 @@ function showToast(msg) {
   t.textContent = '✅ ' + msg;
   t.style.opacity = '1';
   setTimeout(() => t.style.opacity = '0', 2500);
+}
+
+// Store original values
+const originalValues = {
+  contactEmail: document.getElementById('contactEmail')?.value,
+  contactPhone: document.getElementById('contactPhone')?.value,
+  adminName: document.getElementById('adminName')?.value,
+  adminEmail: document.getElementById('adminEmail')?.value,
+  adminPhone: document.getElementById('adminPhone')?.value
+};
+
+function updateField(field){
+  let inputId;
+
+  if(field === "Email") inputId = "contactEmail";
+  else if(field === "Contact Phone") inputId = "contactPhone";
+  else if(field === "Name") inputId = "adminName";
+  else if(field === "Admin Email") inputId = "adminEmail";
+  else if(field === "Admin Phone") inputId = "adminPhone";
+
+  const input = document.getElementById(inputId);
+  const newValue = input.value.trim();
+
+  // ❌ Empty check
+  if(!newValue){
+    showToast("⚠️ Field cannot be empty");
+    return;
+  }
+
+  // 📱 PHONE VALIDATION (exact 10 digits only)
+  if(inputId.includes("Phone")){
+    const phoneRegex = /^[0-9]{10}$/;
+
+    if(!phoneRegex.test(newValue)){
+      showToast("⚠️ Phone number must be exactly 10 digits");
+      return;
+    }
+  }
+
+  // 📧 EMAIL VALIDATION (must end with @email.com)
+  if(inputId.includes("Email")){
+    if(!newValue.endsWith("@email.com")){
+      showToast("⚠️ Email must end with @email.com");
+      return;
+    }
+  }
+
+  // ❌ No change check
+  if(originalValues[inputId] === newValue){
+    showToast("⚠️ No changes detected");
+    return;
+  }
+
+  // ✅ Save
+  originalValues[inputId] = newValue;
+  showToast(field + " updated successfully!");
+}
+
+// Update password
+  function updatePassword(){
+
+  const current = document.getElementById("currentPass").value;
+  const newPass = document.getElementById("newPass").value;
+  const confirm = document.getElementById("confirmPass").value;
+
+  // ❌ empty check
+  if(!current || !newPass || !confirm){
+    showToast("⚠️ Fill all fields");
+    return;
+  }
+
+  // ❌ length check
+  if(newPass.length < 6){
+    showToast("⚠️ Password must be at least 6 characters");
+    return;
+  }
+
+  // ❌ match check
+  if(newPass !== confirm){
+    showToast("⚠️ Passwords do not match");
+    return;
+  }
+
+  // ✅ success
+  showToast("🔐 Password updated successfully!");
+}
+
+function forgotPassword(){
+  alert("Password reset link will be sent to your email (demo)");
 }
 </script>
 
