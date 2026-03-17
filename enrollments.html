@@ -322,7 +322,7 @@ function render(data) {
   const tbody = document.getElementById('eBody');
   tbody.innerHTML = data.map((e,i) => `
     <tr>
-      <td style="color:var(--muted);font-size:13px;">${String(e.id).padStart(2,'0')}</td>
+      <td style="color:var(--muted);font-size:13px;">${String(i + 1).padStart(2,'0')}</td>
       <td>
         <div class="avatar-cell">
           <div class="table-avatar" style="${colors[i] || ''}">${e.name[0]}</div>
