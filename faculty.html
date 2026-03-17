@@ -291,7 +291,11 @@
       <!-- Delete confirm -->
       <!-- DELETE POPUP -->
       <div id="confirmPopup" style="
-    position:absolute;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
     inset:0;
     background:rgba(0,0,0,0.5);
     display:none;
@@ -543,11 +547,14 @@ function saveModal() {
 }
 
 /* ══ DELETE ══ */
-function closePopup(){
-  document.getElementById("confirmPopup").style.display = "none";
-}
 function askDelete() {
   document.getElementById("confirmPopup").style.display = "flex";
+  document.getElementById("modal-box").style.overflow = "hidden";
+}
+
+function closePopup(){
+  document.getElementById("confirmPopup").style.display = "none";
+  document.getElementById("modal-box").style.overflow = "auto";
 }
 function confirmDelete() {
   faculty = faculty.filter(f => f.id !== editingId);
