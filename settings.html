@@ -71,6 +71,8 @@
     <a href="courses.html"><span class="nav-icon">📚</span> Courses</a>
     <div class="nav-section-label">People</div>
     <a href="faculty.html"><span class="nav-icon">👨‍🏫</span> Faculty</a>
+    <div class="nav-section-label">Finance</div>
+    <a href="payments.html"><span class="nav-icon">💳</span> Payments & Fees</a>
     <div class="nav-section-label">System</div>
     <a href="settings.html" class="active"><span class="nav-icon">⚙️</span> Settings</a>
     <a href="index.html"><span class="nav-icon">🌐</span> View Website</a>
@@ -112,57 +114,17 @@
 
       <!-- Settings Nav -->
       <div class="settings-nav">
-        <a class="active" onclick="showSection('institute',this)"><span class="settings-nav-icon">🏛️</span> Institute</a>
-        <a onclick="showSection('contact',this)"><span class="settings-nav-icon">📞</span> Contact</a>
+        <a class="active" onclick="showSection('contact',this)">
+        <span class="settings-nav-icon">📞</span> Contact
+      </a>
         <a onclick="showSection('account',this)"><span class="settings-nav-icon">🔐</span> Account</a>
         <a onclick="showSection('notifications',this)"><span class="settings-nav-icon">🔔</span> Notifications</a>
       </div>
 
       <div>
 
-        <!-- Institute Info -->
-        <div class="panel settings-section visible" id="section-institute">
-          <div class="panel-header">
-            <div><div class="panel-title">Institute Information</div><div class="panel-subtitle">Basic details about your coaching centre</div></div>
-          </div>
-          <div class="panel-body">
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">Institute Name</label>
-                <input class="form-input" type="text" value="PRAJNANAM E-Pathsala"/>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Tagline</label>
-                <input class="form-input" type="text" value="Where Wisdom Meets Technology"/>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Address</label>
-              <input class="form-input" type="text" placeholder="[Institute Address], [City], [State]"/>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">Academic Year</label>
-                <input class="form-input" type="text" value="2025–26"/>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Board</label>
-                <select class="form-select">
-                  <option>CBSE</option>
-                  <option>RBSE</option>
-                  <option>CBSE &amp; RBSE</option>
-                </select>
-              </div>
-            </div>
-            <div class="save-bar">
-              <button class="btn btn-ghost" onclick="alert('Changes discarded.')">Cancel</button>
-              <button class="btn btn-primary" onclick="showToast('Institute info saved!')">💾 Save Changes</button>
-            </div>
-          </div>
-        </div>
-
         <!-- Contact -->
-        <div class="panel settings-section" id="section-contact">
+        <div class="panel settings-section visible" id="section-contact">
           <div class="panel-header">
             <div><div class="panel-title">Contact Details</div><div class="panel-subtitle">Shown on the website and in emails</div></div>
           </div>
@@ -176,10 +138,6 @@
                 <label class="form-label">Phone Number</label>
                 <input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX"/>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Office Hours</label>
-              <input class="form-input" type="text" value="Mon–Sat: 8:00 AM – 7:00 PM"/>
             </div>
             <div class="save-bar">
               <button class="btn btn-ghost">Cancel</button>
