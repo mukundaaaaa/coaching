@@ -40,6 +40,77 @@
     .filter-tab.active, .filter-tab:hover {
       background:var(--saffron-dim); border-color:var(--saffron); color:var(--saffron);
     }
+
+    /* ── EDIT MODAL ── */
+    .modal-overlay {
+      position:fixed; inset:0;
+      background:rgba(26,18,8,0.45);
+      z-index:200;
+      display:flex; align-items:center; justify-content:center;
+      padding:20px;
+      opacity:0; visibility:hidden;
+      transition:opacity 0.25s, visibility 0.25s;
+    }
+    .modal-overlay.open { opacity:1; visibility:visible; }
+    .modal {
+      background:white;
+      border-radius:var(--radius-lg);
+      width:100%; max-width:500px;
+      max-height:90vh;
+      overflow-y:auto;
+      box-shadow:0 24px 64px rgba(26,18,8,0.2);
+      transform:translateY(16px) scale(0.98);
+      transition:transform 0.25s ease;
+    }
+    .modal-overlay.open .modal { transform:translateY(0) scale(1); }
+    .modal::-webkit-scrollbar { width:6px; }
+    .modal::-webkit-scrollbar-thumb { background:var(--border-strong); border-radius:10px; }
+    .modal-header {
+      padding:20px 24px 18px;
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between;
+      position:sticky; top:0; background:white; z-index:2;
+    }
+    .modal-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--deep); }
+    .modal-subtitle { font-size:12px; color:var(--muted); margin-top:2px; }
+    .modal-close {
+      width:32px; height:32px; border-radius:8px;
+      border:1px solid var(--border); background:none;
+      cursor:pointer; font-size:16px; color:var(--muted);
+      display:flex; align-items:center; justify-content:center;
+      transition:all 0.2s; flex-shrink:0;
+    }
+    .modal-close:hover { background:rgba(217,79,79,0.08); border-color:#D94F4F; color:#D94F4F; }
+    .modal-body { padding:24px; }
+    .modal-footer {
+      padding:16px 24px;
+      border-top:1px solid var(--border);
+      display:flex; justify-content:flex-end; gap:10px;
+      position:sticky; bottom:0; background:white; z-index:2;
+    }
+
+    /* ── DELETE CONFIRM DIALOG ── */
+    .del-overlay {
+      position:fixed; inset:0;
+      background:rgba(26,18,8,0.55);
+      z-index:400;
+      display:flex; align-items:center; justify-content:center; padding:20px;
+      opacity:0; visibility:hidden;
+      transition:opacity 0.2s, visibility 0.2s;
+    }
+    .del-overlay.open { opacity:1; visibility:visible; }
+    .del-dialog {
+      background:white; border-radius:var(--radius-lg);
+      padding:28px 28px 22px; width:100%; max-width:320px;
+      text-align:center;
+      box-shadow:0 20px 60px rgba(26,18,8,0.3);
+      transform:scale(0.94); transition:transform 0.2s;
+    }
+    .del-overlay.open .del-dialog { transform:scale(1); }
+    .del-icon  { font-size:36px; margin-bottom:12px; }
+    .del-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--deep); margin-bottom:8px; }
+    .del-msg   { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:22px; }
+    .del-btns  { display:flex; gap:10px; justify-content:center; }
   </style>
 </head>
 <body>
@@ -94,7 +165,7 @@
 
 </div>
     <div class="topbar-right">
-      <button class="btn btn-primary" onclick="alert('Add enrollment form — coming soon!')">+ New Enrollment</button>
+      <button class="btn btn-primary" onclick="openAddModal()">+ New Enrollment</button>
     </div>
   </div>
 
@@ -165,8 +236,70 @@
   </div>
 </div>
 
+<!-- ── EDIT MODAL ── -->
+<div class="modal-overlay" id="editModal" onclick="handleOverlayClick(event)">
+  <div class="modal" id="editModalBox">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modal-title">Edit Enrollment</div>
+        <div class="modal-subtitle" id="modal-subtitle">Update student enrollment details</div>
+      </div>
+      <button class="modal-close" onclick="closeEditModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Student Name <span style="color:#D94F4F;">*</span></label>
+        <input class="form-input" type="text" id="e-name" placeholder="e.g. Rahul Das"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone Number <span style="color:#D94F4F;">*</span></label>
+        <input class="form-input" type="tel" id="e-phone" placeholder="e.g. 98765 43210"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Course <span style="color:#D94F4F;">*</span></label>
+        <select class="form-select" id="e-course">
+          <option value="Class 10">Class 10</option>
+          <option value="Class 12 Science">Class 12 Science</option>
+          <option value="Class 12 Arts">Class 12 Arts</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Enrolled On</label>
+        <input class="form-input" type="text" id="e-date" placeholder="e.g. 12 Mar 2026"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Status</label>
+        <select class="form-select" id="e-status">
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeEditModal()">Cancel</button>
+      <button class="btn btn-primary" id="save-btn" onclick="saveEdit()">💾 Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── DELETE CONFIRM DIALOG ── -->
+<div class="del-overlay" id="delOverlay">
+  <div class="del-dialog">
+    <div class="del-icon">🗑️</div>
+    <div class="del-title">Delete Enrollment?</div>
+    <div class="del-msg">This action cannot be undone. The enrollment record will be permanently removed.</div>
+    <div class="del-btns">
+      <button class="btn btn-ghost" onclick="closeDelDialog()">Cancel</button>
+      <button class="btn" style="background:#D94F4F;color:white;box-shadow:0 3px 10px rgba(217,79,79,0.3);" onclick="confirmDelete()">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast-el" style="position:fixed;bottom:28px;right:28px;background:var(--deep);color:white;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,0.2);">✅</div>
+
 <script>
-const enrollments = [
+let enrollments = [
   { id:1, name:'Rahul Das',     phone:'98765 43210', course:'Class 12 Science', date:'12 Mar 2026', status:'Active' },
   { id:2, name:'Ankit Paul',    phone:'60012 34567', course:'Class 10',          date:'12 Mar 2026', status:'Active' },
   { id:3, name:'Priya Roy',     phone:'70012 34567', course:'Class 12 Arts',     date:'11 Mar 2026', status:'Active' },
@@ -180,6 +313,10 @@ const colors = ['', 'background:linear-gradient(135deg,#5B8DB8,#7EB3D8)', 'backg
 const badgeClass = c => c.includes('Science') ? 'badge-science' : c.includes('Arts') ? 'badge-arts' : 'badge-ten';
 
 let currentFilter = 'all';
+let currentSearch = '';
+let editingId = null;
+let deletingId = null;
+let nextId = 8;
 
 function render(data) {
   const tbody = document.getElementById('eBody');
@@ -196,9 +333,11 @@ function render(data) {
       <td><span class="badge ${badgeClass(e.course)}">${e.course}</span></td>
       <td style="font-size:13px;">${e.date}</td>
       <td><span class="badge ${e.status==='Active'?'badge-green':'badge-muted'}">${e.status}</span></td>
-      <td class="actions-cell">
-      <button class="btn-icon" title="Edit">✏️</button>
-      <button class="btn-icon btn-danger" title="Delete">🗑</button>
+      <td>
+      <div class="actions-cell">
+        <button class="btn-icon" title="Edit" onclick="openEditModal(${e.id})">✏️</button>
+        <button class="btn-icon btn-danger" title="Delete" onclick="openDelDialog(${e.id})">🗑</button>
+      </div>
     </td>
     </tr>`).join('');
 }
@@ -211,19 +350,121 @@ function setFilter(f, btn) {
 }
 
 function filterEnroll(q) {
-  applyFilters(q);
+  currentSearch = q;
+  applyFilters();
 }
 
-function applyFilters(q = '') {
+function applyFilters() {
   const filtered = enrollments.filter(e =>
     (currentFilter === 'all' || e.course.includes(currentFilter)) &&
-    (e.name.toLowerCase().includes(q.toLowerCase()) || e.phone.includes(q))
+    (e.name.toLowerCase().includes(currentSearch.toLowerCase()) || e.phone.includes(currentSearch))
   );
   render(filtered);
 }
 
-render(enrollments);
+/* ── ADD ── */
+function openAddModal() {
+  editingId = null;
+  document.getElementById('modal-title').textContent    = 'New Enrollment';
+  document.getElementById('modal-subtitle').textContent = 'Fill in the student details';
+  document.getElementById('save-btn').textContent       = '+ Add Enrollment';
+  document.getElementById('e-name').value   = '';
+  document.getElementById('e-phone').value  = '';
+  document.getElementById('e-course').value = 'Class 10';
+  document.getElementById('e-date').value   = new Date().toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric'});
+  document.getElementById('e-status').value = 'Active';
+  document.getElementById('editModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
+/* ── EDIT ── */
+function openEditModal(id) {
+  const e = enrollments.find(x => x.id === id);
+  if (!e) return;
+  editingId = id;
+  document.getElementById('e-name').value   = e.name;
+  document.getElementById('e-phone').value  = e.phone;
+  document.getElementById('e-course').value = e.course;
+  document.getElementById('e-date').value   = e.date;
+  document.getElementById('e-status').value = e.status;
+  document.getElementById('editModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEditModal() {
+  document.getElementById('editModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('editModal')) closeEditModal();
+}
+
+function saveEdit() {
+  const name  = document.getElementById('e-name').value.trim();
+  const phone = document.getElementById('e-phone').value.trim();
+  if (!name || !phone) { toast('Name and Phone are required.', true); return; }
+  if (editingId === null) {
+    // ADD NEW
+    enrollments.unshift({
+      id: nextId++,
+      name,
+      phone,
+      course: document.getElementById('e-course').value,
+      date:   document.getElementById('e-date').value.trim(),
+      status: document.getElementById('e-status').value,
+    });
+    closeEditModal();
+    applyFilters();
+    toast('New enrollment added successfully!');
+  } else {
+    // EDIT EXISTING
+    const idx = enrollments.findIndex(x => x.id === editingId);
+    enrollments[idx] = {
+      ...enrollments[idx],
+      name,
+      phone,
+      course: document.getElementById('e-course').value,
+      date:   document.getElementById('e-date').value.trim(),
+      status: document.getElementById('e-status').value,
+    };
+    closeEditModal();
+    applyFilters();
+    toast('Enrollment updated successfully!');
+  }
+  // reset modal title back for next edit open
+  document.getElementById('modal-title').textContent    = 'Edit Enrollment';
+  document.getElementById('modal-subtitle').textContent = 'Update student enrollment details';
+  document.getElementById('save-btn').textContent = '💾 Save Changes';
+}
+
+/* ── DELETE ── */
+function openDelDialog(id) {
+  deletingId = id;
+  document.getElementById('delOverlay').classList.add('open');
+}
+
+function closeDelDialog() {
+  document.getElementById('delOverlay').classList.remove('open');
+}
+
+function confirmDelete() {
+  enrollments = enrollments.filter(x => x.id !== deletingId);
+  closeDelDialog();
+  applyFilters();
+  toast('Enrollment deleted.');
+}
+
+/* ── UTILS ── */
+function toast(msg, err) {
+  const t = document.getElementById('toast-el');
+  t.textContent = (err ? '⚠️ ' : '✅ ') + msg;
+  t.style.background = err ? '#D94F4F' : 'var(--deep)';
+  t.style.opacity = '1';
+  setTimeout(() => t.style.opacity = '0', 2800);
+}
+
+render(enrollments);
 </script>
 <script>
 function toggleSidebar(){
