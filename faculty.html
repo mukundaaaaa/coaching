@@ -30,6 +30,125 @@
     .faculty-tags { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:20px; }
     .faculty-tag  { font-size:11px; background:var(--saffron-pale); color:var(--saffron); padding:3px 10px; border-radius:6px; font-weight:500; }
     .faculty-actions { display:flex; gap:8px; justify-content:center; }
+    .faculty-qual{font-size:12px;color:var(--text-muted);margin-bottom:8px;font-weight:500;}
+    /* ── MODAL OVERLAY ── */
+    .modal-overlay {
+      position:fixed; inset:0;
+      background:rgba(26,18,8,0.45);
+      z-index:200;
+      display:flex; align-items:center; justify-content:center;
+      padding:20px;
+      opacity:0; visibility:hidden;
+      transition:opacity 0.25s, visibility 0.25s;
+    }
+    .modal-overlay.open {
+      opacity:1; visibility:visible;
+    }
+
+    /* ── MODAL BOX ── */
+    
+    
+    .modal {
+      background:white;
+      border-radius:var(--radius-lg);
+      width:100%; max-width:560px;
+      max-height:90vh;
+      overflow-y:auto;
+      box-shadow:0 24px 64px rgba(26,18,8,0.2);
+      transform:translateY(16px) scale(0.98);
+      transition:transform 0.25s ease;
+      position:relative;
+    }
+    .modal-overlay.open .modal {
+      transform:translateY(0) scale(1);
+    }
+    .modal::-webkit-scrollbar { width:6px; }
+    .modal::-webkit-scrollbar-thumb { background:var(--border-strong); border-radius:10px; }
+
+    .modal-header {
+      padding:20px 24px 18px;
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between;
+      position:sticky; top:0; background:white; z-index:2;
+    }
+    .modal-title {
+      font-family:'Playfair Display',serif;
+      font-size:18px; font-weight:700; color:var(--deep);
+    }
+    .modal-subtitle { font-size:12px; color:var(--muted); margin-top:2px; }
+    .modal-close {
+      width:32px; height:32px; border-radius:8px;
+      border:1px solid var(--border); background:none;
+      cursor:pointer; font-size:16px; color:var(--muted);
+      display:flex; align-items:center; justify-content:center;
+      transition:all 0.2s; flex-shrink:0;
+    }
+    .modal-close:hover { background:rgba(217,79,79,0.08); border-color:#D94F4F; color:#D94F4F; }
+
+    .modal-body { padding:24px; }
+
+    /* Avatar picker inside modal */
+    .avatar-editor {
+      display:flex; align-items:center; gap:20px;
+      padding:16px; background:var(--bg);
+      border-radius:var(--radius-md); border:1px solid var(--border);
+      margin-bottom:20px;
+    }
+    .avatar-preview {
+      width:64px; height:64px; border-radius:50%; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Playfair Display',serif; font-weight:700;
+      font-size:24px; color:white;
+      box-shadow:0 4px 14px rgba(232,101,26,0.2);
+      transition:background 0.3s;
+    }
+    .avatar-colors { display:flex; flex-wrap:wrap; gap:8px; }
+    .avatar-color-btn {
+      width:26px; height:26px; border-radius:50%;
+      border:2px solid transparent; cursor:pointer;
+      transition:transform 0.15s, border-color 0.15s;
+    }
+    .avatar-color-btn:hover { transform:scale(1.15); }
+    .avatar-color-btn.selected { border-color: var(--deep); transform:scale(1.1); }
+    .avatar-color-label { font-size:12px; color:var(--muted); margin-top:4px; }
+
+    /* Tags editor */
+    .tags-editor { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+    .tag-chip {
+      display:inline-flex; align-items:center; gap:5px;
+      background:var(--saffron-pale); color:var(--saffron);
+      padding:4px 10px; border-radius:6px;
+      font-size:12px; font-weight:600;
+    }
+    .tag-remove {
+      background:none; border:none; cursor:pointer;
+      color:var(--saffron); font-size:14px; line-height:1;
+      padding:0; opacity:0.6; transition:opacity 0.15s;
+    }
+    .tag-remove:hover { opacity:1; }
+    .tag-add-row { display:flex; gap:8px; margin-top:8px; }
+    .tag-add-input {
+      flex:1; padding:8px 12px;
+      border:1.5px solid var(--border); border-radius:var(--radius-sm);
+      font-family:'DM Sans',sans-serif; font-size:13px;
+      outline:none; transition:border-color 0.2s;
+    }
+    .tag-add-input:focus { border-color:var(--saffron); }
+
+    .modal-footer {
+      padding:16px 24px;
+      border-top:1px solid var(--border);
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px; position:sticky; bottom:0; background:white; z-index:2;
+    }
+    .delete-confirm-row {
+      display:none; align-items:center; gap:10px;
+      padding:12px 16px; background:rgba(217,79,79,0.06);
+      border:1px solid rgba(217,79,79,0.2); border-radius:var(--radius-md);
+      margin-top:16px;
+    }
+    .delete-confirm-row.show { display:flex; }
+    .delete-confirm-text { font-size:13px; color:#D94F4F; font-weight:500; flex:1; }
   </style>
 </head>
 <body>
@@ -52,6 +171,8 @@
     <a href="courses.html"><span class="nav-icon">📚</span> Courses</a>
     <div class="nav-section-label">People</div>
     <a href="faculty.html" class="active"><span class="nav-icon">👨‍🏫</span> Faculty</a>
+    <div class="nav-section-label">Finance</div>
+    <a href="payments.html"><span class="nav-icon">💳</span> Payments &amp; Fees</a>
     <div class="nav-section-label">System</div>
     <a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a>
     <a href="index.html"><span class="nav-icon">🌐</span> View Website</a>
@@ -60,10 +181,8 @@
     <div class="sidebar-user">
       <div class="user-avatar">A</div>
       <div class="user-info"><div class="user-name">Admin</div><div class="user-role">Super Administrator</div></div>
-      <button class="user-logout" onclick="confirmLogout()" title="Logout">
-        <span>🚪</span>
-        </button>    
-      </div>
+      <button class="user-logout" onclick="confirmLogout()" title="Logout"><span>🚪</span></button>
+    </div>
   </div>
 </aside>
 
@@ -72,17 +191,14 @@
 <div class="main">
   <div class="topbar">
     <div class="topbar-left">
-
-  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-
-  <div class="topbar-title-group">
-    <span class="topbar-breadcrumb">Admin Panel · People</span>
-    <span class="topbar-title">Faculty</span>
-  </div>
-
-</div>
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <div class="topbar-title-group">
+        <span class="topbar-breadcrumb">Admin Panel · People</span>
+        <span class="topbar-title">Faculty</span>
+      </div>
+    </div>
     <div class="topbar-right">
-      <button class="btn btn-primary" onclick="alert('Add faculty form — coming soon!')">+ Add Faculty</button>
+      <button class="btn btn-primary" onclick="openAddModal()">+ Add Faculty</button>
     </div>
   </div>
 
@@ -92,95 +208,393 @@
       <div class="panel-header">
         <div>
           <div class="panel-title">Faculty Members</div>
-          <div class="panel-subtitle">3 active educators</div>
+          <div class="panel-subtitle" id="faculty-count">3 active educators</div>
         </div>
         <div class="search-bar">
           <span class="search-icon">🔍</span>
-          <input type="text" placeholder="Search faculty…"/>
+          <input type="text" placeholder="Search faculty…" oninput="searchFaculty(this.value)"/>
         </div>
       </div>
     </div>
 
-    <div class="faculty-grid stagger">
+    <div class="faculty-grid stagger" id="faculty-grid"></div>
 
-      <div class="faculty-card">
-        <div class="faculty-avatar">A</div>
-        <div class="faculty-name">Arun Kumar Singh</div>
-        <div class="faculty-role">Founder &amp; Director</div>
-        <div class="faculty-bio">Over 15 years of teaching experience. Leads the institute with a passion for making quality education accessible to all.</div>
-        <div class="faculty-tags">
-          <span class="faculty-tag">Mathematics</span>
-          <span class="faculty-tag">Physics</span>
-          <span class="faculty-tag">Class 12 Science</span>
-        </div>
-        <div class="faculty-actions">
-          <button class="btn btn-outline" style="font-size:12px;padding:7px 14px;">✏️ Edit</button>
-          <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px;">👁 View</button>
-        </div>
-      </div>
-
-      <div class="faculty-card">
-        <div class="faculty-avatar" style="background:linear-gradient(135deg,#5B8DB8,#7EB3D8);">P</div>
-        <div class="faculty-name">Priya Sharma</div>
-        <div class="faculty-role">Senior Faculty – Science</div>
-        <div class="faculty-bio">M.Sc. Chemistry with 10+ years of coaching. Known for making complex concepts simple and exam-ready.</div>
-        <div class="faculty-tags">
-          <span class="faculty-tag">Chemistry</span>
-          <span class="faculty-tag">Biology</span>
-          <span class="faculty-tag">Class 12 Science</span>
-        </div>
-        <div class="faculty-actions">
-          <button class="btn btn-outline" style="font-size:12px;padding:7px 14px;">✏️ Edit</button>
-          <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px;">👁 View</button>
-        </div>
-      </div>
-
-      <div class="faculty-card">
-        <div class="faculty-avatar" style="background:linear-gradient(135deg,#C9922A,#E8B94A);">R</div>
-        <div class="faculty-name">Rajan Dey</div>
-        <div class="faculty-role">Senior Faculty – Arts</div>
-        <div class="faculty-bio">MA in History and Political Science. Specialises in essay writing, map work, and analytical thinking for Board exams.</div>
-        <div class="faculty-tags">
-          <span class="faculty-tag">History</span>
-          <span class="faculty-tag">Political Science</span>
-          <span class="faculty-tag">Economics</span>
-        </div>
-        <div class="faculty-actions">
-          <button class="btn btn-outline" style="font-size:12px;padding:7px 14px;">✏️ Edit</button>
-          <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px;">👁 View</button>
-        </div>
-      </div>
-
-    </div>
   </div>
 </div>
 
+<!-- ══════════════════════════════
+     EDIT / ADD MODAL
+═══════════════════════════════════ -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal-box">
+
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modal-title">Edit Faculty</div>
+        <div class="modal-subtitle" id="modal-subtitle">Update faculty member details</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- Avatar picker -->
+      <div class="avatar-editor">
+        <div class="avatar-preview" id="modal-avatar-preview">A</div>
+        <div>
+          <div class="avatar-color-label" style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:8px;">Avatar Colour</div>
+          <div class="avatar-colors" id="avatar-color-picker"></div>
+        </div>
+      </div>
+
+      <!-- Name -->
+      <div class="form-group">
+        <label class="form-label">Full Name <span style="color:#D94F4F;">*</span></label>
+        <input class="form-input" type="text" id="f-name" placeholder="e.g. Arun Kumar Singh"/>
+      </div>
+
+      <!-- Role -->
+      <div class="form-group">
+        <label class="form-label">Role / Designation <span style="color:#D94F4F;">*</span></label>
+        <input class="form-input" type="text" id="f-role" placeholder="e.g. Senior Faculty – Science"/>
+      </div>
+
+      <!-- Qualification -->
+      <div class="form-group">
+        <label class="form-label">Qualification</label>
+        <input class="form-input" type="text" id="f-qual" placeholder="e.g. M.Sc. Chemistry, B.Ed."/>
+      </div>
+
+      <!-- Experience -->
+      <div class="form-group">
+        <label class="form-label">Experience</label>
+        <input class="form-input" type="text" id="f-exp" placeholder="e.g. 10+ years of coaching"/>
+      </div>
+
+      <!-- Subjects taught -->
+      <div class="form-group">
+        <label class="form-label">Subjects Taught (Tags)</label>
+        <div class="tags-editor" id="tags-list"></div>
+        <div class="tag-add-row">
+          <input class="tag-add-input" type="text" id="tag-input" placeholder="Type subject and press Enter or +" onkeydown="tagKeydown(event)"/>
+          <button class="btn btn-outline" style="padding:8px 14px;font-size:13px;" onclick="addTag()">+ Add</button>
+        </div>
+        <div class="form-hint">e.g. Physics, Class 12 Science, Mathematics</div>
+      </div>
+
+      <!-- Bio -->
+      <div class="form-group">
+        <label class="form-label">Short Bio</label>
+        <textarea class="form-textarea" id="f-bio" placeholder="Brief description about the faculty member…" rows="3"></textarea>
+      </div>
+
+      <!-- Delete confirm -->
+      <!-- DELETE POPUP -->
+      <div id="confirmPopup" style="
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+    border-radius:var(--radius-lg);
+    ">
+
+      <div style="
+      background:white;
+      padding:20px;
+      border-radius:12px;
+      width:90%;
+      max-width:320px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,0.2);
+      ">
+
+        <h3 style="margin-bottom:10px;color:#D94F4F;">Delete Faculty?</h3>
+        <p style="font-size:13px;color:#777;margin-bottom:15px;">
+          This action cannot be undone.
+        </p>
+
+        <div style="display:flex;gap:10px;justify-content:center;">
+          <button class="btn btn-ghost" onclick="closePopup()">Cancel</button>
+          <button class="btn" style="background:#D94F4F;color:white;" onclick="confirmDelete()">Delete</button>
+        </div>
+
+      </div>
+    </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-danger" id="delete-btn" onclick="askDelete()" style="font-size:12px;">🗑 Delete</button>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveModal()">💾 Save Changes</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast-el" style="position:fixed;bottom:28px;right:28px;background:var(--deep);color:white;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,0.2);">✅</div>
 
 <script>
-function toggleSidebar(){
-  const sidebar = document.querySelector('.sidebar');
-  const overlay = document.querySelector('.sidebar-overlay');
+/* ══ DATA ══ */
+let faculty = [
+  {
+    id:1, name:'Arun Kumar Singh', role:'Founder & Director',
+    qual:'M.Sc. Mathematics, B.Ed.', exp:'15+ years of teaching',
+    bio:'Over 15 years of teaching experience. Leads the institute with a passion for making quality education accessible to all.',
+    tags:['Mathematics','Physics','Class 12 Science'],
+    color:'linear-gradient(135deg,#E8651A,#C9922A)'
+  },
+  {
+    id:2, name:'Priya Sharma', role:'Senior Faculty – Science',
+    qual:'M.Sc. Chemistry', exp:'10+ years of coaching',
+    bio:'M.Sc. Chemistry with 10+ years of coaching. Known for making complex concepts simple and exam-ready.',
+    tags:['Chemistry','Biology','Class 12 Science'],
+    color:'linear-gradient(135deg,#5B8DB8,#7EB3D8)'
+  },
+  {
+    id:3, name:'Rajan Dey', role:'Senior Faculty – Arts',
+    qual:'MA History & Political Science', exp:'8+ years of teaching',
+    bio:'MA in History and Political Science. Specialises in essay writing, map work, and analytical thinking for Board exams.',
+    tags:['History','Political Science','Economics'],
+    color:'linear-gradient(135deg,#C9922A,#E8B94A)'
+  },
+];
+let nextId = 4;
+let editingId = null;
+let currentTags = [];
 
-  sidebar.classList.toggle('open');
+const AVATAR_COLORS = [
+  { label:'Saffron',  bg:'linear-gradient(135deg,#E8651A,#C9922A)' },
+  { label:'Blue',     bg:'linear-gradient(135deg,#5B8DB8,#7EB3D8)' },
+  { label:'Gold',     bg:'linear-gradient(135deg,#C9922A,#E8B94A)' },
+  { label:'Purple',   bg:'linear-gradient(135deg,#5B4E9E,#8B7EC8)' },
+  { label:'Green',    bg:'linear-gradient(135deg,#2E9E5B,#5DC98A)' },
+  { label:'Rose',     bg:'linear-gradient(135deg,#C04E7A,#E87EAA)' },
+  { label:'Teal',     bg:'linear-gradient(135deg,#2E8B8B,#5DC9C9)'  },
+  { label:'Maroon',   bg:'linear-gradient(135deg,#8B2E2E,#C95C5C)'  },
+];
+const SOLID_COLORS = ['#E8651A','#5B8DB8','#C9922A','#5B4E9E','#2E9E5B','#C04E7A','#2E8B8B','#8B2E2E'];
 
-  if(overlay){
-    overlay.classList.toggle('show');
+/* ══ RENDER GRID ══ */
+function renderGrid(data) {
+  const grid = document.getElementById('faculty-grid');
+  document.getElementById('faculty-count').textContent = data.length + ' active educator' + (data.length !== 1 ? 's' : '');
+  if (!data.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;"><div class="empty-state"><div class="empty-icon">👨‍🏫</div><p>No faculty members found.</p></div></div>';
+    return;
   }
+  grid.innerHTML = data.map(f => `
+    <div class="faculty-card">
+      <div class="faculty-avatar" style="background:${f.color};">${f.name[0]}</div>
+      <div class="faculty-name">${f.name}</div>
+      <div class="faculty-role">${f.role}</div>
+
+      ${f.qual ? `<div class="faculty-qual">🎓 ${f.qual}</div>` : ''}
+
+      <div class="faculty-bio">${f.bio}</div>
+      <div class="faculty-tags">${f.tags.map(t=>`<span class="faculty-tag">${t}</span>`).join('')}</div>
+      <div class="faculty-actions">
+        <button class="btn btn-outline" style="font-size:12px;padding:7px 14px;" onclick="openEditModal(${f.id})">✏️ Edit</button>
+      </div>
+    </div>`).join('');
 }
 
-</script>
+/* ══ SEARCH ══ */
+function searchFaculty(q) {
+  const filtered = faculty.filter(f =>
+    f.name.toLowerCase().includes(q.toLowerCase()) ||
+    f.role.toLowerCase().includes(q.toLowerCase()) ||
+    f.tags.some(t => t.toLowerCase().includes(q.toLowerCase()))
+  );
+  renderGrid(filtered);
+}
 
-<script>
+/* ══ AVATAR COLOUR PICKER ══ */
+function buildColorPicker(selectedBg) {
+  const picker = document.getElementById('avatar-color-picker');
+  picker.innerHTML = AVATAR_COLORS.map((c, i) => `
+    <button class="avatar-color-btn ${c.bg === selectedBg ? 'selected' : ''}"
+      style="background:${SOLID_COLORS[i]};"
+      title="${c.label}"
+      onclick="selectAvatarColor('${c.bg}', this)">
+    </button>`).join('');
+}
+
+function selectAvatarColor(bg, btn) {
+  document.querySelectorAll('.avatar-color-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('modal-avatar-preview').style.background = bg;
+  document.getElementById('modal-avatar-preview').dataset.color = bg;
+}
+
+/* ══ TAGS ══ */
+function renderTags() {
+  document.getElementById('tags-list').innerHTML = currentTags.map((t, i) => `
+    <span class="tag-chip">${t}
+      <button class="tag-remove" onclick="removeTag(${i})">×</button>
+    </span>`).join('');
+}
+
+function addTag() {
+  const inp = document.getElementById('tag-input');
+  const val = inp.value.trim();
+  if (val && !currentTags.includes(val)) {
+    currentTags.push(val);
+    renderTags();
+  }
+  inp.value = '';
+  inp.focus();
+}
+
+function removeTag(i) {
+  currentTags.splice(i, 1);
+  renderTags();
+}
+
+function tagKeydown(e) {
+  if (e.key === 'Enter') { e.preventDefault(); addTag(); }
+}
+
+/* ══ OPEN EDIT MODAL ══ */
+function openEditModal(id) {
+  const f = faculty.find(x => x.id === id);
+  if (!f) return;
+  editingId = id;
+
+  document.getElementById('modal-title').textContent   = 'Edit Faculty Member';
+  document.getElementById('modal-subtitle').textContent = 'Update details for ' + f.name;
+  document.getElementById('delete-btn').style.display  = '';
+
+  const av = document.getElementById('modal-avatar-preview');
+  av.textContent    = f.name[0];
+  av.style.background = f.color;
+  av.dataset.color  = f.color;
+
+  document.getElementById('f-name').value  = f.name;
+  document.getElementById('f-role').value  = f.role;
+  document.getElementById('f-qual').value  = f.qual || '';
+  document.getElementById('f-exp').value   = f.exp  || '';
+  document.getElementById('f-bio').value   = f.bio;
+
+  currentTags = [...f.tags];
+  renderTags();
+  buildColorPicker(f.color);
+  openModal();
+}
+
+/* ══ OPEN ADD MODAL ══ */
+function openAddModal() {
+  editingId = null;
+  document.getElementById('modal-title').textContent    = 'Add New Faculty';
+  document.getElementById('modal-subtitle').textContent = 'Fill in the details for the new member';
+  document.getElementById('delete-btn').style.display   = 'none';
+  const av = document.getElementById('modal-avatar-preview');
+  av.textContent      = '?';
+  av.style.background = AVATAR_COLORS[0].bg;
+  av.dataset.color    = AVATAR_COLORS[0].bg;
+
+  document.getElementById('f-name').value  = '';
+  document.getElementById('f-role').value  = '';
+  document.getElementById('f-qual').value  = '';
+  document.getElementById('f-exp').value   = '';
+  document.getElementById('f-bio').value   = '';
+  currentTags = [];
+  renderTags();
+  buildColorPicker(AVATAR_COLORS[0].bg);
+  openModal();
+}
+
+/* ══ SAVE ══ */
+function saveModal() {
+  const name = document.getElementById('f-name').value.trim();
+  const role = document.getElementById('f-role').value.trim();
+  if (!name || !role) { toast('Please fill in Name and Role.', true); return; }
+
+  const av    = document.getElementById('modal-avatar-preview');
+  const color = av.dataset.color || AVATAR_COLORS[0].bg;
+
+  const data = {
+    name, role, color,
+    qual:  document.getElementById('f-qual').value.trim(),
+    exp:   document.getElementById('f-exp').value.trim(),
+    bio:   document.getElementById('f-bio').value.trim(),
+    tags:  [...currentTags],
+  };
+
+  if (editingId) {
+    const idx = faculty.findIndex(f => f.id === editingId);
+    faculty[idx] = { ...faculty[idx], ...data };
+    toast(name + ' updated successfully!');
+  } else {
+    faculty.push({ id: nextId++, ...data });
+    toast(name + ' added successfully!');
+  }
+
+  // Update avatar letter
+  faculty.find(f => f.name === name && f.role === role) && renderGrid(faculty);
+  renderGrid(faculty);
+  closeModal();
+}
+
+/* ══ DELETE ══ */
+function closePopup(){
+  document.getElementById("confirmPopup").style.display = "none";
+}
+function askDelete() {
+  document.getElementById("confirmPopup").style.display = "flex";
+}
+function confirmDelete() {
+  faculty = faculty.filter(f => f.id !== editingId);
+  renderGrid(faculty);
+  closePopup();
+  closeModal();
+  toast('Faculty member removed.');
+}
+
+/* ══ MODAL OPEN/CLOSE ══ */
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // update avatar letter on name input
+  document.getElementById('f-name').addEventListener('input', syncAvatarLetter);
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('f-name').removeEventListener('input', syncAvatarLetter);
+}
+function syncAvatarLetter() {
+  const val = document.getElementById('f-name').value.trim();
+  document.getElementById('modal-avatar-preview').textContent = val ? val[0].toUpperCase() : '?';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+/* ══ UTILS ══ */
+function toast(msg, err) {
+  const t = document.getElementById('toast-el');
+  t.textContent      = (err ? '⚠️ ' : '✅ ') + msg;
+  t.style.background = err ? '#D94F4F' : 'var(--deep)';
+  t.style.opacity    = '1';
+  setTimeout(() => t.style.opacity = '0', 2800);
+}
+function toggleSidebar() {
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.querySelector('.sidebar-overlay').classList.toggle('show');
+}
 function confirmLogout() {
-
-  const logout = confirm("Are you sure you want to logout?");
-
-  if(logout){
-    window.location.href = "login.html";
-  }
-
+  if (confirm('Are you sure you want to logout?')) location.href = 'login.html';
 }
-</script>
 
+/* ══ INIT ══ */
+renderGrid(faculty);
+</script>
 </body>
 </html>
