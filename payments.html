@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payments & Fees — PRAJNANAM Admin</title>
+  <link rel="stylesheet" href="admin-shared.css"/>
+  <style>
+    .pay-tabs {
+      display: flex; gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .pay-tab {
+      padding: 11px 20px;
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+      color: var(--muted); background: none; border: none;
+      border-bottom: 2px solid transparent; cursor: pointer;
+      transition: all 0.2s; margin-bottom: -1px;
+    }
+    .pay-tab:hover { color: var(--ink); }
+    .pay-tab.active { color: var(--saffron); border-bottom-color: var(--saffron); }
+
+    .pay-section { display: none; }
+    .pay-section.visible { display: block; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+
+    .fee-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 15px 0; border-bottom: 1px solid var(--border);
+    }
+    .fee-row:last-child { border-bottom: none; }
+    .fee-row-left { display: flex; align-items: center; gap: 12px; }
+    .fee-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+    }
+    .fee-label { font-size: 14px; font-weight: 600; color: var(--deep); }
+    .fee-sub   { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .fee-group { display: flex; align-items: stretch; }
+    .fee-prefix {
+      padding: 9px 11px; background: var(--bg);
+      border: 1.5px solid var(--border); border-right: none;
+      border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+      font-size: 14px; font-weight: 700; color: var(--muted); line-height: 1;
+    }
+    .fee-num {
+      width: 120px; padding: 9px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+      color: var(--deep); background: white; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .fee-num:focus { border-color: var(--saffron); box-shadow: 0 0 0 3px rgba(232,101,26,0.1); }
+
+    .pmt-block {
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: var(--radius-md); padding: 16px; margin-bottom: 12px;
+    }
+    .pmt-block:last-child { margin-bottom: 0; }
+    .pmt-block-title {
+      font-size: 13px; font-weight: 700; color: var(--deep);
+      margin-bottom: 12px; display: flex; align-items: center; gap: 7px;
+    }
+    .qr-box {
+      border: 2px dashed var(--border); border-radius: var(--radius-md);
+      padding: 28px 20px; text-align: center; cursor: pointer;
+      background: white; transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .qr-box:hover { border-color: var(--saffron); background: var(--saffron-pale); }
+    .qr-box input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .qr-box-icon { font-size: 30px; margin-bottom: 8px; }
+    .qr-box-text { font-size: 13px; font-weight: 600; color: var(--muted); }
+    .qr-box-hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .qr-img { width:130px; height:130px; border-radius:var(--radius-md); object-fit:cover; border:2px solid var(--border); margin:0 auto 8px; display:block; }
+
+    .save-bar {
+      display: flex; justify-content: flex-end; gap: 10px;
+      padding-top: 16px; border-top: 1px solid var(--border); margin-top: 16px;
+    }
+    .status-paid    { background: rgba(46,158,91,0.1);  color: #2E9E5B; }
+    .status-pending { background: rgba(217,79,79,0.1);  color: #D94F4F; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <a href="admin-dashboard.html" class="sidebar-logo">
+      <div class="sidebar-logo-mark">प्र</div>
+      <div class="sidebar-logo-text">
+        <span class="sidebar-logo-name">PRAJNANAM</span>
+        <span class="sidebar-logo-sub">E-Pathsala</span>
+      </div>
+    </a>
+    <div class="sidebar-badge"><div class="sidebar-badge-dot"></div> Admin Panel</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <a href="admin-dashboard.html"><span class="nav-icon">📊</span> Dashboard</a>
+    <a href="enrollments.html"><span class="nav-icon">📋</span> Enrollments</a>
+    <a href="courses.html"><span class="nav-icon">📚</span> Courses</a>
+    <div class="nav-section-label">People</div>
+    <a href="faculty.html"><span class="nav-icon">👨‍🏫</span> Faculty</a>
+    <div class="nav-section-label">Finance</div>
+    <a href="payments.html" class="active"><span class="nav-icon">💳</span> Payments &amp; Fees</a>
+    <div class="nav-section-label">System</div>
+    <a href="settings.html"><span class="nav-icon">⚙️</span> Settings</a>
+    <a href="index.html"><span class="nav-icon">🌐</span> View Website</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="user-avatar">A</div>
+      <div class="user-info"><div class="user-name">Admin</div><div class="user-role">Super Administrator</div></div>
+      <button class="user-logout" onclick="confirmLogout()" title="Logout"><span>🚪</span></button>
+    </div>
+  </div>
+</aside>
+
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <div class="topbar-title-group">
+        <span class="topbar-breadcrumb">Admin Panel · Finance</span>
+        <span class="topbar-title">Payments &amp; Fees</span>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="page-content">
+
+    <div class="pay-tabs">
+      <button class="pay-tab active" onclick="switchTab('fees',this)">💰 Course Fees</button>
+      <button class="pay-tab" onclick="switchTab('payment',this)">🏦 Payment Details</button>
+    </div>
+
+    <!-- TAB 1: FEES -->
+    <div class="pay-section visible" id="tab-fees">
+      <div class="two-col">
+
+        <div class="panel">
+          <div class="panel-header">
+            <div><div class="panel-title">Update Course Fees</div><div class="panel-subtitle">Set the fee for each course</div></div>
+          </div>
+          <div class="panel-body">
+            <div class="fee-row">
+              <div class="fee-row-left">
+                <div class="fee-icon" style="background:rgba(91,141,184,0.12);">📘</div>
+                <div><div class="fee-label">Class 10</div><div class="fee-sub">Foundation Batch · All Subjects</div></div>
+              </div>
+              <div class="fee-group"><span class="fee-prefix">₹</span><input class="fee-num" type="number" id="fee-ten" value="8000" min="0" oninput="updateSummary()"/></div>
+            </div>
+            <div class="fee-row">
+              <div class="fee-row-left">
+                <div class="fee-icon" style="background:rgba(232,101,26,0.1);">🔬</div>
+                <div><div class="fee-label">Class 12 – Science</div><div class="fee-sub">PCM / PCB · Complete Batch</div></div>
+              </div>
+              <div class="fee-group"><span class="fee-prefix">₹</span><input class="fee-num" type="number" id="fee-science" value="12000" min="0" oninput="updateSummary()"/></div>
+            </div>
+            <div class="fee-row">
+              <div class="fee-row-left">
+                <div class="fee-icon" style="background:rgba(201,146,42,0.1);">📜</div>
+                <div><div class="fee-label">Class 12 – Arts</div><div class="fee-sub">All Subjects · Complete Batch</div></div>
+              </div>
+              <div class="fee-group"><span class="fee-prefix">₹</span><input class="fee-num" type="number" id="fee-arts" value="9000" min="0" oninput="updateSummary()"/></div>
+            </div>
+            <div class="save-bar">
+              <button class="btn btn-primary" onclick="saveFees()">💾 Save Fees</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div><div class="panel-title">Fee Summary</div><div class="panel-subtitle">Live preview — updates as you type</div></div>
+          </div>
+          <div class="panel-body">
+            <div id="fee-summary" style="display:flex;flex-direction:column;gap:10px;"></div>
+            <div style="margin-top:18px;padding:16px;background:var(--saffron-pale);border-radius:var(--radius-md);border:1px solid rgba(232,101,26,0.2);">
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--saffron);margin-bottom:4px;">Total Revenue Potential</div>
+              <div id="rev-total" style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--deep);">₹0</div>
+              <div style="font-size:12px;color:var(--muted);margin-top:3px;">Enrolled students × current fees</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 2: PAYMENT DETAILS -->
+    <div class="pay-section" id="tab-payment">
+      <div class="two-col">
+
+        <div class="panel">
+          <div class="panel-header">
+            <div><div class="panel-title">UPI &amp; QR Code</div><div class="panel-subtitle">Students pay using these details</div></div>
+          </div>
+          <div class="panel-body">
+            <div class="pmt-block">
+              <div class="pmt-block-title">📱 UPI ID</div>
+              <div class="form-group" style="margin:0;">
+                <label class="form-label">UPI ID</label>
+                <input class="form-input" type="text" placeholder="yourname@upi" value="prajnanam@upi"/>
+                <div class="form-hint">e.g. 9876543210@paytm · name@okicici</div>
+              </div>
+            </div>
+            <div class="pmt-block">
+              <div class="pmt-block-title">🔲 QR Code (Optional)</div>
+              <div class="qr-box" onclick="document.getElementById('qrFile').click()">
+                <input type="file" id="qrFile" accept="image/*" onchange="previewQR(event)"/>
+                <div id="qr-ph">
+                  <div class="qr-box-icon">🔲</div>
+                  <div class="qr-box-text">Click to upload QR image</div>
+                  <div class="qr-box-hint">PNG or JPG · max 2MB</div>
+                </div>
+                <div id="qr-pv" style="display:none;">
+                  <img id="qr-img" class="qr-img" src="" alt="QR"/>
+                  <div class="qr-box-hint">Click to change image</div>
+                </div>
+              </div>
+            </div>
+            <div class="save-bar">
+              <button class="btn btn-primary" onclick="toast('UPI & QR saved!')">💾 Save</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div><div class="panel-title">Bank Account Details</div><div class="panel-subtitle">For NEFT / IMPS / RTGS transfers</div></div>
+          </div>
+          <div class="panel-body">
+            <div class="pmt-block">
+              <div class="pmt-block-title">🏦 Bank Transfer</div>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div class="form-group" style="margin:0;">
+                  <label class="form-label">Account Holder Name</label>
+                  <input class="form-input" type="text" value="PRAJNANAM E-Pathsala"/>
+                </div>
+                <div class="form-group" style="margin:0;">
+                  <label class="form-label">Account Number</label>
+                  <input class="form-input" type="text" id="acc1" placeholder="Enter account number"/>
+                </div>
+                <div class="form-group" style="margin:0;">
+                  <label class="form-label">Confirm Account Number</label>
+                  <input class="form-input" type="text" id="acc2" placeholder="Re-enter to confirm"/>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                  <div class="form-group" style="margin:0;">
+                    <label class="form-label">IFSC Code</label>
+                    <input class="form-input" type="text" placeholder="SBIN0001234" style="text-transform:uppercase;"/>
+                  </div>
+                  <div class="form-group" style="margin:0;">
+                    <label class="form-label">Bank Name</label>
+                    <input class="form-input" type="text" placeholder="e.g. SBI, HDFC"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="save-bar">
+              <button class="btn btn-ghost">Cancel</button>
+              <button class="btn btn-primary" onclick="saveBank()">💾 Save Bank Details</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-el" style="position:fixed;bottom:28px;right:28px;background:var(--deep);color:white;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,0.2);">✅</div>
+
+<script>
+const COUNTS = {ten:40,science:52,arts:32};
+const cb = c => c.includes('Science')?'badge-science':c.includes('Arts')?'badge-arts':'badge-ten';
+
+
+function switchTab(id,btn){
+  document.querySelectorAll('.pay-section').forEach(s=>s.classList.remove('visible'));
+  document.getElementById('tab-'+id).classList.add('visible');
+  document.querySelectorAll('.pay-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(id==='fees') updateSummary();
+}
+
+function updateSummary(){
+  const t=+document.getElementById('fee-ten').value||0;
+  const s=+document.getElementById('fee-science').value||0;
+  const a=+document.getElementById('fee-arts').value||0;
+  const rows=[
+    {icon:'📘',label:'Class 10',          count:COUNTS.ten,     fee:t, bg:'rgba(91,141,184,0.12)'},
+    {icon:'🔬',label:'Class 12 – Science',count:COUNTS.science, fee:s, bg:'rgba(232,101,26,0.1)'},
+    {icon:'📜',label:'Class 12 – Arts',   count:COUNTS.arts,    fee:a, bg:'rgba(201,146,42,0.1)'},
+  ];
+  document.getElementById('fee-summary').innerHTML=rows.map(r=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:var(--bg);border-radius:var(--radius-md);border:1px solid var(--border);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:9px;background:${r.bg};display:flex;align-items:center;justify-content:center;font-size:16px;">${r.icon}</div>
+        <div><div style="font-size:13px;font-weight:600;color:var(--deep);">${r.label}</div><div style="font-size:11px;color:var(--muted);">${r.count} students</div></div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--deep);">₹${r.fee.toLocaleString('en-IN')}</div>
+        <div style="font-size:11px;color:var(--muted);">= ₹${(r.count*r.fee).toLocaleString('en-IN')}</div>
+      </div>
+    </div>`).join('');
+  document.getElementById('rev-total').textContent='₹'+rows.reduce((s,r)=>s+r.count*r.fee,0).toLocaleString('en-IN');
+}
+function saveFees(){updateSummary();toast('Course fees updated!');}
+
+function previewQR(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{document.getElementById('qr-img').src=ev.target.result;document.getElementById('qr-ph').style.display='none';document.getElementById('qr-pv').style.display='block';};
+  r.readAsDataURL(f);
+}
+function saveBank(){
+  const a=document.getElementById('acc1').value.trim(),b=document.getElementById('acc2').value.trim();
+  if(a&&b&&a!==b){toast('❌ Account numbers do not match!',true);return;}
+  toast('Bank details saved!');
+}
+
+
+function toast(msg,err){
+  const t=document.getElementById('toast-el');
+  t.textContent=(err?'':'✅ ')+msg;t.style.background=err?'#D94F4F':'var(--deep)';t.style.opacity='1';
+  setTimeout(()=>t.style.opacity='0',2800);
+}
+function toggleSidebar(){document.querySelector('.sidebar').classList.toggle('open');document.querySelector('.sidebar-overlay').classList.toggle('show');}
+function confirmLogout(){if(confirm('Are you sure you want to logout?'))location.href='login.html';}
+
+updateSummary();
+</script>
+</body>
+</html>
