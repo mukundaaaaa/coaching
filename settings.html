@@ -146,7 +146,7 @@
       <label class="form-label">Phone Number</label>
       <div style="display:flex;gap:10px;">
         <input id="contactPhone" class="form-input" type="tel" placeholder="XXXXX XXXXX"/>
-        <button class="btn btn-primary" onclick="updateField('Phone')">Update</button>
+        <button class="btn btn-primary"onclick="updateField('Contact Phone')">Update</button>
       </div>
     </div>
 
@@ -187,7 +187,7 @@
       <label class="form-label">Phone Number</label>
       <div style="display:flex;gap:10px;">
         <input id="adminPhone" class="form-input" type="tel" placeholder="XXXXX XXXXX"/>
-        <button class="btn btn-primary" onclick="updateField('Phone')">Update</button>
+        <button class="btn btn-primary" onclick="updateField('Admin Phone')">Update</button>
       </div>
     </div>
 
@@ -280,10 +280,10 @@ function updateField(field){
     }
   }
 
-  // 📧 EMAIL VALIDATION (must end with @email.com)
+  // 📧 EMAIL VALIDATION (must end with @gmail.com)
   if(inputId.includes("Email")){
-    if(!newValue.endsWith("@email.com")){
-      showToast("⚠️ Email must end with @email.com");
+    if(!newValue.endsWith("@gmail.com")){
+      showToast("⚠️ Email must end with @gmail.com");
       return;
     }
   }
