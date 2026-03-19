@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terms of Use – PRAJNANAM E-Pathsala</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --saffron: #E8651A; --saffron-light: #F4884A; --saffron-pale: #FDF0E6;
+      --deep: #1A1208; --ink: #2C1F0E; --warm: #6B4C2A; --gold: #C9922A;
+      --gold-light: #E8B94A; --cream: #FBF6EE; --text-muted: #7A6252;
+      --border: rgba(201,146,42,0.2);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+    /* NAVBAR */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 6vw; height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(251,246,238,0.95); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 32px rgba(26,18,8,0.08);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-weight: 900; font-size: 18px;
+      color: white; box-shadow: 0 2px 12px rgba(232,101,26,0.35);
+    }
+    .nav-title-block { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-title-main { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 15px; color: var(--ink); letter-spacing: 0.04em; }
+    .nav-title-sub { font-size: 10px; color: var(--saffron); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; color: var(--warm);
+      text-decoration: none; padding: 8px 18px; border-radius: 6px;
+      border: 1.5px solid var(--border); background: white; transition: all 0.2s;
+    }
+    .nav-back:hover { color: var(--saffron); border-color: var(--saffron); }
+    .nav-privacy-link {
+      font-size: 13px; font-weight: 600; color: var(--saffron);
+      text-decoration: none; padding: 8px 18px; border-radius: 6px;
+      background: var(--saffron-pale); border: 1px solid rgba(232,101,26,0.25);
+      transition: all 0.2s;
+    }
+    .nav-privacy-link:hover { background: rgba(232,101,26,0.15); }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 120px 8vw 56px; text-align: center; background: white;
+      border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 80% 50%, rgba(232,101,26,0.05) 0%, transparent 60%),
+                  radial-gradient(circle at 20% 50%, rgba(201,146,42,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .page-hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,146,42,0.12); border: 1px solid rgba(201,146,42,0.3);
+      color: var(--gold); font-size: 11px; font-weight: 700;
+      padding: 5px 14px; border-radius: 100px; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(30px, 4vw, 48px); color: var(--deep); line-height: 1.1; margin-bottom: 14px;
+    }
+    .page-hero h1 span { color: var(--gold); }
+    .page-hero p {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 17px; color: var(--text-muted); max-width: 520px; margin: 0 auto 20px; line-height: 1.6;
+    }
+    .effective-date {
+      display: inline-block; font-size: 12px; color: var(--text-muted);
+      background: var(--saffron-pale); border: 1px solid var(--border);
+      padding: 6px 16px; border-radius: 100px; font-weight: 500;
+    }
+
+    /* SISTER PAGE BANNER */
+    .sister-banner {
+      background: linear-gradient(135deg, #2C1F0E, #1A1208);
+      padding: 16px 8vw;
+      display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;
+    }
+    .sister-banner p { font-size: 13px; color: rgba(255,255,255,0.7); }
+    .sister-banner a {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--gold); color: white;
+      padding: 7px 18px; border-radius: 6px; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .sister-banner a:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── MOBILE TOC FAB + DRAWER ───────────────────────── */
+    .toc-fab {
+      display: none;
+      position: fixed; bottom: 24px; right: 20px; z-index: 200;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--saffron));
+      border: none; cursor: pointer;
+      box-shadow: 0 4px 20px rgba(201,146,42,0.45);
+      align-items: center; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .toc-fab:hover { transform: scale(1.07); box-shadow: 0 6px 28px rgba(201,146,42,0.55); }
+    .toc-fab svg { pointer-events: none; }
+
+    .toc-overlay {
+      display: none; position: fixed; inset: 0; z-index: 190;
+      background: rgba(26,18,8,0.45); backdrop-filter: blur(3px);
+      opacity: 0; transition: opacity 0.28s ease;
+    }
+    .toc-overlay.open { opacity: 1; }
+
+    .toc-drawer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 195;
+      background: var(--cream); border-radius: 20px 20px 0 0;
+      box-shadow: 0 -8px 40px rgba(26,18,8,0.18);
+      transform: translateY(100%);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      max-height: 78vh; display: flex; flex-direction: column; overflow: hidden;
+    }
+    .toc-drawer.open { transform: translateY(0); }
+
+    .toc-drawer-handle {
+      width: 40px; height: 4px; border-radius: 2px;
+      background: rgba(107,76,42,0.25); margin: 12px auto 0; flex-shrink: 0;
+    }
+    .toc-drawer-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px 10px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .toc-drawer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px; font-weight: 700; color: var(--deep);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .toc-drawer-close {
+      width: 32px; height: 32px; border-radius: 50%; border: none;
+      background: rgba(201,146,42,0.1); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 18px; line-height: 1; transition: background 0.2s;
+    }
+    .toc-drawer-close:hover { background: rgba(201,146,42,0.2); }
+
+    .toc-drawer-list {
+      list-style: none; overflow-y: auto;
+      padding: 8px 0 24px; flex: 1; -webkit-overflow-scrolling: touch;
+    }
+    .toc-drawer-list li a {
+      display: flex; align-items: center; gap: 12px; padding: 12px 20px;
+      font-size: 14px; font-weight: 500; color: var(--warm);
+      text-decoration: none; border-left: 3px solid transparent; transition: all 0.18s;
+    }
+    .toc-drawer-list li a:active,
+    .toc-drawer-list li a:hover { color: var(--gold); background: rgba(201,146,42,0.07); border-left-color: var(--gold); }
+    .toc-drawer-list li a .toc-num { font-size: 11px; font-weight: 700; color: var(--saffron); min-width: 24px; }
+    /* ── END MOBILE TOC ─────────────────────────────────── */
+
+    /* LAYOUT */
+    .content-wrap {
+      max-width: 1060px; margin: 0 auto; padding: 60px 8vw 100px;
+      display: grid; grid-template-columns: 240px 1fr; gap: 52px; align-items: start;
+    }
+
+    /* DESKTOP TOC */
+    .toc { position: sticky; top: 100px; background: white; border-radius: 16px; border: 1.5px solid var(--border); overflow: hidden; }
+    .toc-header {
+      background: linear-gradient(135deg, var(--gold), var(--saffron));
+      padding: 16px 20px; font-family: 'Playfair Display', serif;
+      font-size: 14px; font-weight: 700; color: white; letter-spacing: 0.04em;
+    }
+    .toc-list { list-style: none; padding: 10px 0; }
+    .toc-list li a {
+      display: block; padding: 8px 20px; font-size: 12px; font-weight: 500; color: var(--warm);
+      text-decoration: none; border-left: 3px solid transparent; transition: all 0.2s; line-height: 1.4;
+    }
+    .toc-list li a:hover, .toc-list li a.active { color: var(--gold); border-left-color: var(--gold); background: rgba(201,146,42,0.07); }
+
+    /* SECTIONS */
+    .doc-section { margin-bottom: 48px; scroll-margin-top: 110px; opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .doc-section.visible { opacity: 1; transform: translateY(0); }
+    .doc-section-num {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
+    }
+    .doc-section-num::before { content: ''; width: 20px; height: 2px; background: var(--gold); }
+    .doc-section h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(18px, 2.2vw, 24px); color: var(--deep); margin-bottom: 16px; line-height: 1.25; }
+    .doc-section p { font-size: 14px; color: var(--warm); line-height: 1.85; margin-bottom: 14px; }
+    .doc-section p:last-child { margin-bottom: 0; }
+    .doc-section ul, .doc-section ol { padding-left: 22px; margin-bottom: 14px; }
+    .doc-section li { font-size: 14px; color: var(--warm); line-height: 1.8; margin-bottom: 6px; }
+    .doc-section strong { color: var(--ink); font-weight: 600; }
+    .doc-section a { color: var(--saffron); text-decoration: none; font-weight: 500; }
+    .doc-section a:hover { text-decoration: underline; }
+
+    .section-divider { height: 1px; background: var(--border); margin: 44px 0; }
+
+    /* CALLOUTS */
+    .callout { border-radius: 12px; padding: 16px 20px; margin: 18px 0; display: flex; gap: 13px; align-items: flex-start; }
+    .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .callout-body { font-size: 13px; line-height: 1.75; }
+    .callout-body strong { display: block; margin-bottom: 3px; font-size: 13px; font-weight: 700; }
+    .callout-info { background: rgba(91,141,184,0.09); border: 1px solid rgba(91,141,184,0.25); }
+    .callout-info .callout-body { color: #3a6080; }
+    .callout-info .callout-body strong { color: #2a4f6e; }
+    .callout-warn { background: rgba(232,101,26,0.07); border: 1px solid rgba(232,101,26,0.22); }
+    .callout-warn .callout-body { color: var(--warm); }
+    .callout-warn .callout-body strong { color: var(--saffron); }
+    .callout-success { background: rgba(72,160,100,0.08); border: 1px solid rgba(72,160,100,0.25); }
+    .callout-success .callout-body { color: #2d6640; }
+    .callout-success .callout-body strong { color: #236035; }
+
+    /* TABLE */
+    .data-table { width: 100%; border-collapse: collapse; margin: 18px 0; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--border); font-size: 13px; }
+    .data-table th { background: rgba(201,146,42,0.1); padding: 11px 15px; text-align: left; font-weight: 700; color: var(--ink); border-bottom: 1.5px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .data-table td { padding: 11px 15px; color: var(--warm); line-height: 1.6; border-bottom: 1px solid rgba(201,146,42,0.1); vertical-align: top; }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* CONTACT BOX */
+    .contact-box { background: linear-gradient(135deg, rgba(201,146,42,0.08), rgba(232,101,26,0.07)); border: 1.5px solid var(--border); border-radius: 16px; padding: 26px 30px; margin-top: 18px; }
+    .contact-box h4 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--deep); margin-bottom: 14px; }
+    .contact-item { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--warm); margin-bottom: 10px; line-height: 1.5; }
+    .contact-item a { color: var(--saffron); text-decoration: none; font-weight: 500; }
+    .contact-item a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    .page-footer { background: var(--deep); padding: 36px 8vw; text-align: center; }
+    .page-footer p { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+    .page-footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+    .page-footer-links a { font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .page-footer-links a:hover { color: var(--saffron-light); }
+    .page-footer-links a.active-page { color: var(--gold-light); border-bottom: 1px solid var(--gold-light); }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .content-wrap { grid-template-columns: 1fr; padding: 40px 6vw 100px; }
+      .toc { display: none; }
+      .nav-privacy-link { display: none; }
+      .toc-fab { display: flex; }
+      .toc-overlay { display: block; pointer-events: none; }
+      .toc-overlay.open { pointer-events: all; }
+      .toc-drawer { display: flex; }
+    }
+    @media (max-width: 600px) { .page-hero { padding: 100px 6vw 44px; } .sister-banner { gap: 12px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo">प्र</div>
+    <div class="nav-title-block">
+      <span class="nav-title-main">PRAJNANAM</span>
+      <span class="nav-title-sub">E-Pathsala</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a href="privacy-policy.html" class="nav-privacy-link">← Privacy Policy</a>
+    <a href="index.html" class="nav-back">← Home</a>
+  </div>
+</nav>
+
+<!-- ── MOBILE TOC FAB ───────────────────────────────────── -->
+<button class="toc-fab" id="tocFab" aria-label="Open table of contents" aria-expanded="false">
+  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="3" y="5" width="6" height="2" rx="1" fill="white"/>
+    <rect x="3" y="10" width="6" height="2" rx="1" fill="white"/>
+    <rect x="3" y="15" width="6" height="2" rx="1" fill="white"/>
+    <rect x="11" y="5" width="8" height="2" rx="1" fill="rgba(255,255,255,0.6)"/>
+    <rect x="11" y="10" width="8" height="2" rx="1" fill="rgba(255,255,255,0.6)"/>
+    <rect x="11" y="15" width="8" height="2" rx="1" fill="rgba(255,255,255,0.6)"/>
+  </svg>
+</button>
+
+<div class="toc-overlay" id="tocOverlay"></div>
+
+<div class="toc-drawer" id="tocDrawer" role="dialog" aria-modal="true" aria-label="Table of contents">
+  <div class="toc-drawer-handle"></div>
+  <div class="toc-drawer-header">
+    <div class="toc-drawer-title">📋 On This Page</div>
+    <button class="toc-drawer-close" id="tocClose" aria-label="Close table of contents">✕</button>
+  </div>
+  <ul class="toc-drawer-list">
+    <li><a href="#t1"  class="toc-drawer-link"><span class="toc-num">01</span> Acceptance of Terms</a></li>
+    <li><a href="#t2"  class="toc-drawer-link"><span class="toc-num">02</span> Description of Services</a></li>
+    <li><a href="#t3"  class="toc-drawer-link"><span class="toc-num">03</span> Eligibility</a></li>
+    <li><a href="#t4"  class="toc-drawer-link"><span class="toc-num">04</span> Account &amp; Registration</a></li>
+    <li><a href="#t5"  class="toc-drawer-link"><span class="toc-num">05</span> Fees &amp; Payments</a></li>
+    <li><a href="#t6"  class="toc-drawer-link"><span class="toc-num">06</span> Refund Policy</a></li>
+    <li><a href="#t7"  class="toc-drawer-link"><span class="toc-num">07</span> Attendance &amp; Conduct</a></li>
+    <li><a href="#t8"  class="toc-drawer-link"><span class="toc-num">08</span> Intellectual Property</a></li>
+    <li><a href="#t9"  class="toc-drawer-link"><span class="toc-num">09</span> Prohibited Conduct</a></li>
+    <li><a href="#t10" class="toc-drawer-link"><span class="toc-num">10</span> Disclaimer</a></li>
+    <li><a href="#t11" class="toc-drawer-link"><span class="toc-num">11</span> Limitation of Liability</a></li>
+    <li><a href="#t12" class="toc-drawer-link"><span class="toc-num">12</span> Governing Law</a></li>
+    <li><a href="#t13" class="toc-drawer-link"><span class="toc-num">13</span> Modifications</a></li>
+    <li><a href="#t14" class="toc-drawer-link"><span class="toc-num">14</span> Contact Us</a></li>
+  </ul>
+</div>
+<!-- ── END MOBILE TOC ─────────────────────────────────────── -->
+
+<div class="page-hero">
+  <div class="page-hero-eyebrow">📜 Legal</div>
+  <h1><span>Terms</span> of Use</h1>
+  <p>The rules and agreements that govern your use of PRAJNANAM E-Pathsala's services.</p>
+  <span class="effective-date">📅 Effective Date: June 1, 2026 &nbsp;·&nbsp; Last Updated: June 1, 2026</span>
+</div>
+
+<div class="sister-banner">
+  <p>Also read our Privacy Policy to understand how we handle your personal data.</p>
+  <a href="privacy-policy.html">View Privacy Policy →</a>
+</div>
+
+<div class="content-wrap">
+
+  <!-- DESKTOP TOC -->
+  <aside class="toc">
+    <div class="toc-header">📋 On This Page</div>
+    <ul class="toc-list">
+      <li><a href="#t1">1. Acceptance of Terms</a></li>
+      <li><a href="#t2">2. Description of Services</a></li>
+      <li><a href="#t3">3. Eligibility</a></li>
+      <li><a href="#t4">4. Account & Registration</a></li>
+      <li><a href="#t5">5. Fees & Payments</a></li>
+      <li><a href="#t6">6. Refund Policy</a></li>
+      <li><a href="#t7">7. Attendance & Conduct</a></li>
+      <li><a href="#t8">8. Intellectual Property</a></li>
+      <li><a href="#t9">9. Prohibited Conduct</a></li>
+      <li><a href="#t10">10. Disclaimer</a></li>
+      <li><a href="#t11">11. Limitation of Liability</a></li>
+      <li><a href="#t12">12. Governing Law</a></li>
+      <li><a href="#t13">13. Modifications</a></li>
+      <li><a href="#t14">14. Contact Us</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <div>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">📌</span>
+      <div class="callout-body">
+        <strong>Please read carefully.</strong>
+        By accessing our website or enrolling in any course, you agree to these Terms of Use. If you do not agree, please do not use our services.
+      </div>
+    </div>
+
+    <div class="doc-section" id="t1">
+      <div class="doc-section-num">Section 01</div>
+      <h2>Acceptance of Terms</h2>
+      <p>These Terms of Use ("<strong>Terms</strong>") constitute a legally binding agreement between you ("<strong>User</strong>," "<strong>Student</strong>," or "<strong>Parent/Guardian</strong>") and <strong>PRAJNANAM E-Pathsala</strong> ("<strong>we</strong>," "<strong>us</strong>," or "<strong>our</strong>").</p>
+      <p>By visiting our website, creating an account, submitting an enrollment form, or making a payment, you confirm that you have read, understood, and agree to be bound by these Terms and our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+      <p>These Terms are effective from <strong>June 1, 2026</strong> and apply to all users of our website and services.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t2">
+      <div class="doc-section-num">Section 02</div>
+      <h2>Description of Services</h2>
+      <p>PRAJNANAM E-Pathsala provides the following services:</p>
+      <ul>
+        <li><strong>Offline classroom coaching</strong> for Class 10 and Class 12 (Science and Arts streams) at our physical institute</li>
+        <li><strong>Online enrollment and registration</strong> through our website</li>
+        <li><strong>Online fee payment</strong> through a third-party payment gateway</li>
+        <li><strong>Student portal</strong> for tracking enrollment status, attendance, and fee receipts</li>
+        <li><strong>Communication services</strong> — SMS/email alerts for schedules, exams, and notices</li>
+      </ul>
+      <p>We reserve the right to modify, suspend, or discontinue any service at any time with reasonable prior notice, except where circumstances beyond our control require immediate action.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t3">
+      <div class="doc-section-num">Section 03</div>
+      <h2>Eligibility</h2>
+      <p>To use our services and enroll in courses, you must:</p>
+      <ul>
+        <li>Be a student currently studying in Class 10 or Class 12 (or seeking admission to these classes)</li>
+        <li>Provide accurate and truthful personal and academic information at the time of registration</li>
+        <li>If under 18 years of age, have the consent of a parent or legal guardian, who must also accept these Terms on your behalf</li>
+        <li>Have the legal capacity to enter into a binding agreement (or have a parent/guardian do so on your behalf)</li>
+      </ul>
+      <p>We reserve the right to refuse enrollment or cancel an existing enrollment if any information provided is found to be false, misleading, or incomplete.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t4">
+      <div class="doc-section-num">Section 04</div>
+      <h2>Account Registration & Security</h2>
+      <p>When you register on our website, you create a student account. By doing so, you agree to:</p>
+      <ul>
+        <li>Provide accurate, current, and complete information</li>
+        <li>Keep your login credentials (username and password) confidential</li>
+        <li>Not share your account with any other person</li>
+        <li>Notify us immediately at <a href="mailto:infoprajnanam@gmail.com">infoprajnanam@gmail.com</a> if you suspect unauthorized access to your account</li>
+        <li>Accept responsibility for all activities that occur under your account</li>
+      </ul>
+      <p>We reserve the right to suspend or terminate accounts that are found to be shared, misused, or used in violation of these Terms.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t5">
+      <div class="doc-section-num">Section 05</div>
+      <h2>Fees & Payment Terms</h2>
+      <div class="callout callout-info">
+        <span class="callout-icon">💳</span>
+        <div class="callout-body">
+          <strong>Secure Online Payments</strong>
+          All online payments are processed through a PCI-DSS certified third-party payment gateway. PRAJNANAM does not store your full card details.
+        </div>
+      </div>
+      <p><strong>Fee Structure:</strong></p>
+      <ul>
+        <li>Course fees are displayed on the enrollment page at the time of registration</li>
+        <li>Fees are quoted in <strong>Indian Rupees (INR)</strong> and are inclusive of all applicable taxes unless stated otherwise</li>
+        <li>We reserve the right to revise fees for new academic batches with at least <strong>15 days' advance notice</strong></li>
+        <li>Existing enrolled students will not face mid-session fee hikes without written consent</li>
+      </ul>
+      <p><strong>Payment Methods Accepted:</strong></p>
+      <ul>
+        <li>UPI (Google Pay, PhonePe, Paytm, BHIM UPI)</li>
+        <li>Debit Card / Credit Card</li>
+        <li>Net Banking</li>
+        <li>EMI (if offered by your bank — subject to bank terms)</li>
+        <li>Cash payment at the institute (offline, against a manual receipt)</li>
+      </ul>
+      <p><strong>Payment Confirmation:</strong> Upon successful payment, you will receive a confirmation email and/or SMS with a transaction ID and fee receipt. Please retain this for your records.</p>
+      <p><strong>Failed Transactions:</strong> If your payment fails but your bank account is debited, please contact us within <strong>7 working days</strong>. We will coordinate with the payment gateway to resolve the issue. Refunds for failed transactions are processed within <strong>5–10 working days</strong> back to the original payment method.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t6">
+      <div class="doc-section-num">Section 06</div>
+      <h2>Refund & Cancellation Policy</h2>
+      <table class="data-table">
+        <thead><tr><th>Situation</th><th>Refund</th><th>Timeline</th></tr></thead>
+        <tbody>
+          <tr><td>Cancellation within <strong>48 hours</strong> of payment (before any class attended)</td><td>Full refund</td><td>5–10 working days</td></tr>
+          <tr><td>Cancellation within <strong>7 days</strong> of first class</td><td>Refund minus registration fee (if any) and gateway charges</td><td>7–14 working days</td></tr>
+          <tr><td>Cancellation after <strong>7 days</strong> of first class</td><td>No refund (pro-rata at our discretion, case-by-case)</td><td>—</td></tr>
+          <tr><td>Course cancelled or discontinued by PRAJNANAM</td><td>Full refund of unused portion</td><td>7–14 working days</td></tr>
+          <tr><td>Failed / duplicate payment by error</td><td>Full refund</td><td>5–10 working days</td></tr>
+        </tbody>
+      </table>
+      <p>To request a refund, email <a href="mailto:infoprajnanam@gmail.com">infoprajnanam@gmail.com</a> with your enrollment ID and transaction reference. Refunds are processed to the original payment method only.</p>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>Non-Refundable Items</strong>
+          Fees paid for study materials, printed resources, or registration/admin charges are non-refundable once issued.
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t7">
+      <div class="doc-section-num">Section 07</div>
+      <h2>Attendance, Conduct & Discipline</h2>
+      <p><strong>Attendance:</strong></p>
+      <ul>
+        <li>Regular attendance is expected. Minimum 75% attendance may be required to sit for internal exams</li>
+        <li>Absent students are responsible for covering missed content on their own</li>
+        <li>Leave requests for extended absences must be communicated to the institute in advance</li>
+      </ul>
+      <p><strong>Code of Conduct:</strong></p>
+      <ul>
+        <li>Students must treat faculty, staff, and fellow students with respect at all times</li>
+        <li>Mobile phones must be on silent during class. Disruption of classes is not permitted</li>
+        <li>Cheating, copying, or misconduct during internal tests will result in cancellation of that test</li>
+        <li>Bullying, harassment, or discriminatory behavior of any kind is strictly prohibited</li>
+      </ul>
+      <p><strong>Disciplinary Action:</strong> The institute reserves the right to issue warnings, suspend, or terminate enrollment (without refund in serious cases) for repeated or severe violations of the code of conduct.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t8">
+      <div class="doc-section-num">Section 08</div>
+      <h2>Intellectual Property</h2>
+      <p>All content published on the PRAJNANAM E-Pathsala website — including text, graphics, logos, study materials, notes, question papers, and course content — is the intellectual property of PRAJNANAM E-Pathsala, protected under applicable Indian copyright law.</p>
+      <ul>
+        <li>Students may use course materials <strong>solely for their own personal study</strong></li>
+        <li>You may <strong>not</strong> reproduce, distribute, share, sell, or publish our materials without prior written consent</li>
+        <li>Recording of classes (audio or video) without explicit permission from faculty is strictly prohibited</li>
+        <li>Unauthorized sharing of our materials on social media or online platforms will be treated as a violation of these Terms and applicable law</li>
+      </ul>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t9">
+      <div class="doc-section-num">Section 09</div>
+      <h2>Prohibited Conduct</h2>
+      <p>When using our website and services, you must not:</p>
+      <ul>
+        <li>Provide false or misleading information during registration or enrollment</li>
+        <li>Attempt to hack, reverse-engineer, or disrupt our website or systems</li>
+        <li>Use automated tools (bots, scrapers) to access or collect data from our website</li>
+        <li>Impersonate another student, faculty member, or staff</li>
+        <li>Attempt to make fraudulent payments or chargebacks in bad faith</li>
+        <li>Use our platform for any unlawful purpose</li>
+        <li>Post or transmit any harmful, offensive, or defamatory content through our communication channels</li>
+      </ul>
+      <p>Violations may result in immediate account suspension, reporting to relevant authorities, and legal action under applicable Indian law (including the Information Technology Act, 2000).</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t10">
+      <div class="doc-section-num">Section 10</div>
+      <h2>Disclaimer of Warranties</h2>
+      <p>Our services are provided on an "<strong>as is</strong>" and "<strong>as available</strong>" basis. While we strive for excellence in teaching, we make no guarantees that:</p>
+      <ul>
+        <li>The website will be available 100% of the time without interruption</li>
+        <li>Specific academic results or Board exam scores will be achieved by any student</li>
+        <li>All content on the website is error-free at all times</li>
+      </ul>
+      <p>Results depend on a student's own effort, dedication, and individual capabilities. We commit to providing the best possible teaching, but we cannot guarantee any specific outcome.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t11">
+      <div class="doc-section-num">Section 11</div>
+      <h2>Limitation of Liability</h2>
+      <p>To the fullest extent permitted under applicable Indian law, PRAJNANAM E-Pathsala, its directors, faculty, and staff shall not be liable for:</p>
+      <ul>
+        <li>Indirect, incidental, or consequential damages arising from use of our services</li>
+        <li>Loss of data due to technical failures beyond our reasonable control</li>
+        <li>Delays or disruptions caused by force majeure events (natural disasters, government orders, internet outages, pandemics, etc.)</li>
+        <li>Actions of third-party service providers (payment gateways, SMS providers, etc.)</li>
+        <li>Academic outcomes or Board exam results</li>
+      </ul>
+      <p>In any event, our maximum liability to you shall not exceed the <strong>total fee amount paid by you</strong> for the specific course in question.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t12">
+      <div class="doc-section-num">Section 12</div>
+      <h2>Governing Law & Dispute Resolution</h2>
+      <p>These Terms shall be governed by and construed in accordance with the laws of <strong>India</strong>.</p>
+      <ul>
+        <li><strong>Step 1 – Negotiation:</strong> Any dispute shall first be attempted to be resolved amicably through direct communication with us within 30 days</li>
+        <li><strong>Step 2 – Mediation:</strong> If unresolved, parties shall attempt mediation through a mutually agreed mediator</li>
+        <li><strong>Step 3 – Jurisdiction:</strong> If mediation fails, disputes shall be subject to the exclusive jurisdiction of the competent courts at <strong>[City/District], [State], India</strong></li>
+      </ul>
+      <p>Consumer disputes related to payments are also subject to the Consumer Protection Act, 2019, and you may file complaints with the appropriate Consumer Forum.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t13">
+      <div class="doc-section-num">Section 13</div>
+      <h2>Modifications to Terms</h2>
+      <p>We may update these Terms from time to time. When we make significant changes, we will:</p>
+      <ul>
+        <li>Update the "Last Updated" date at the top of this page</li>
+        <li>Notify registered users via email at least <strong>7 days</strong> before changes take effect</li>
+        <li>Post a notice on our website</li>
+      </ul>
+      <p>Your continued use of our services after the effective date of updated Terms constitutes your acceptance of those changes.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="doc-section" id="t14">
+      <div class="doc-section-num">Section 14</div>
+      <h2>Contact Us</h2>
+      <div class="contact-box">
+        <h4>PRAJNANAM E-Pathsala — Legal & Grievances</h4>
+        <div class="contact-item">📧 <a href="mailto:infoprajnanam@gmail.com">infoprajnanam@gmail.com</a> &nbsp;(Subject: "Terms / Complaint")</div>
+        <div class="contact-item">📞 <a href="tel:+919876543210">+91 98765 43210</a></div>
+        <div class="contact-item">📍 [Institute Address], [City], [State], India</div>
+        <div class="contact-item">⏰ Monday – Saturday, 8:00 AM – 7:00 PM IST</div>
+        <div class="contact-item" style="margin-top:10px;font-size:12px;color:var(--text-muted);">For fee refund queries, please include your <strong>Enrollment ID</strong> and <strong>Transaction Reference Number</strong> in your email.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="page-footer">
+  <p>© 2026 PRAJNANAM E-Pathsala. All rights reserved.</p>
+  <div class="page-footer-links">
+    <a href="index.html">Home</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-of-use.html" class="active-page">Terms of Use</a>
+    <a href="mailto:infoprajnanam@gmail.com">Contact Us</a>
+  </div>
+</footer>
+
+<script>
+  /* ── Desktop TOC: scroll spy ─────────────────────────── */
+  const sections = document.querySelectorAll('.doc-section[id]');
+  const tocLinks = document.querySelectorAll('.toc-list a');
+
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  sections.forEach(s => revealObserver.observe(s));
+
+  const tocObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => tocObserver.observe(s));
+
+  /* ── Mobile TOC drawer ───────────────────────────────── */
+  const fab      = document.getElementById('tocFab');
+  const overlay  = document.getElementById('tocOverlay');
+  const drawer   = document.getElementById('tocDrawer');
+  const closeBtn = document.getElementById('tocClose');
+
+  function openDrawer() {
+    overlay.classList.add('open');
+    drawer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    fab.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeDrawer() {
+    overlay.classList.remove('open');
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+    fab.setAttribute('aria-expanded', 'false');
+  }
+
+  fab.addEventListener('click', openDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+
+  document.querySelectorAll('.toc-drawer-link').forEach(link => {
+    link.addEventListener('click', () => closeDrawer());
+  });
+
+  /* Swipe-down to close */
+  let touchStartY = 0;
+  drawer.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+  drawer.addEventListener('touchend', e => {
+    if (e.changedTouches[0].clientY - touchStartY > 60) closeDrawer();
+  }, { passive: true });
+
+  /* Escape key */
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+</script>
+</body>
+</html>
