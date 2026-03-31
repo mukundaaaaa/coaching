@@ -46,12 +46,11 @@
     nav.scrolled { box-shadow: 0 4px 32px rgba(26,18,8,0.10); }
     .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .nav-logo {
-      width: 42px; height: 42px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--saffron), var(--gold));
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif; font-weight: 900; font-size: 18px;
-      color: white; box-shadow: 0 2px 12px rgba(232,101,26,0.35);
-    }
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+  }
     .nav-title-block { display: flex; flex-direction: column; line-height: 1.1; }
     .nav-title-main {
       font-family: 'Playfair Display', serif; font-weight: 700; font-size: 15px;
@@ -199,7 +198,6 @@
     .course-row:hover .course-name { color: var(--saffron); }
     .course-info { display: flex; align-items: center; gap: 10px; }
     .course-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .dot-science { background: var(--saffron); }
     .dot-arts { background: var(--gold); }
     .dot-ten { background: #5B8DB8; }
     .course-name { font-size: 14px; font-weight: 500; color: var(--ink); transition: color 0.2s; }
@@ -207,7 +205,6 @@
       font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
       padding: 3px 10px; border-radius: 100px;
     }
-    .tag-science { background: rgba(232,101,26,0.1); color: var(--saffron); }
     .tag-arts { background: rgba(201,146,42,0.1); color: var(--gold); }
     .tag-ten { background: rgba(91,141,184,0.1); color: #5B8DB8; }
     .card-footer {
@@ -309,7 +306,6 @@
     .course-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
     }
-    .card-science::before { background: linear-gradient(90deg, var(--saffron), var(--gold)); }
     .card-arts::before { background: linear-gradient(90deg, var(--gold), #c9922a); }
     .card-ten::before { background: linear-gradient(90deg, #5B8DB8, #7EB3D8); }
     .course-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(26,18,8,0.12); border-color: var(--saffron-light); }
@@ -327,7 +323,6 @@
     .subject-tag {
       font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
     }
-    .subject-science { background: rgba(232,101,26,0.1); color: var(--saffron); }
     .subject-arts { background: rgba(201,146,42,0.1); color: var(--gold); }
     .subject-ten { background: rgba(91,141,184,0.1); color: #5B8DB8; }
     .course-card-footer { display: flex; justify-content: space-between; align-items: center; }
@@ -511,7 +506,7 @@
     /* ── MOBILE MENU ── */
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
     .hamburger span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s; }
-    .hamburger.active span:nth-child(1){transform: rotate(45deg) translate(3.5px, 3.5px);}
+    .hamburger.active span:nth-child(1){transform: rotate(45deg) translate(3.4px, 3.4px);}
     .hamburger.active span:nth-child(2){opacity: 0;}
     .hamburger.active span:nth-child(3){transform: rotate(-45deg) translate(6px, -6px);}
     .mobile-menu {
@@ -566,7 +561,7 @@
 <!-- ── NAVBAR ── -->
 <nav id="navbar">
   <a href="#" class="nav-brand">
-    <div class="nav-logo">प्र</div>
+  <img src="logo/logo1.png" class="nav-logo">
     <div class="nav-title-block">
       <span class="nav-title-main">PRAJNANAM</span>
       <span class="nav-title-sub">E-Pathsala</span>
@@ -579,7 +574,7 @@
     <a href="#how">Admission</a>
     <a href="#faculty">Faculty</a>
     <a href="#contact">Contact</a>
-    <a href="login.html" class="nav-btn">Login</a>
+    <a href="login.html" class="nav-btn" id="navAuthBtn" style="visibility:hidden;">Login</a>
   </div>
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
@@ -593,7 +588,7 @@
   <a href="#how">Admission</a>
   <a href="#faculty">Faculty</a>
   <a href="#contact">Contact</a>
-  <a href="login.html">Login →</a>
+  <a href="login.html" id="mobileAuthBtn">Login →</a>
 </div>
 
 <!-- ── HERO ── -->
@@ -617,7 +612,7 @@
       <p class="hero-tagline">Where Wisdom Meets Technology</p>
 
       <p class="hero-sub">
-        Premium offline coaching for Class 10 & 12 — Science and Arts.
+        Premium offline coaching for Class 10 & 12 — Arts.
       </p>
 
       <div class="hero-ctas">
@@ -639,14 +634,6 @@
             <div class="card-header-text">
               <h3>Available Courses</h3>
             </div>
-          </div>
-
-          <div class="course-row">
-            <div class="course-info">
-              <div class="course-dot dot-science"></div>
-              <span class="course-name">Class 12 – Science</span>
-            </div>
-            <span class="course-tag tag-science">PCM / PCB</span>
           </div>
 
           <div class="course-row">
@@ -690,7 +677,7 @@
         PRAJNANAM E-Pathsala was founded with a single mission — to make quality education accessible to every student in the region. Our name, drawn from Sanskrit meaning "wisdom" or "knowledge," reflects our commitment to deep learning.
       </p>
       <p class="section-body">
-        We offer expert-led offline classes for Class 10 and 12 (Science & Arts), while making the entire admission, payment, and progress tracking experience seamlessly digital.
+        We offer expert-led offline classes for Class 10 and 12 (Arts), while making the entire admission, payment, and progress tracking experience seamlessly digital.
       </p>
       <div class="about-features">
         <div class="about-feat">
@@ -717,7 +704,6 @@
             <div class="small">PRAJNANAM</div>
           </div>
         </div>
-        <div class="orbit-item orbit-1">📐 Class 12 Science</div>
         <div class="orbit-item orbit-2">🎨 Class 12 Arts</div>
         <div class="orbit-item orbit-3">📖 Class 10</div>
       </div>
@@ -735,26 +721,7 @@
         Focused coaching for Board exams with thorough subject coverage, regular tests, and personal attention.
       </p>
     </div>
-    <div class="courses-grid">
-      <!-- 12th Science -->
-      <div class="course-card card-science">
-        <div class="course-card-icon">🔬</div>
-        <div class="course-card-class">Class XII · Science</div>
-        <div class="course-card-title">Science Stream<br/>Complete Batch</div>
-        <div class="course-card-desc">
-          Comprehensive coaching for PCM and PCB students. Board exam preparation with chapter-wise testing and doubt sessions.
-        </div>
-        <div class="course-subjects">
-          <span class="subject-tag subject-science">Physics</span>
-          <span class="subject-tag subject-science">Chemistry</span>
-          <span class="subject-tag subject-science">Mathematics</span>
-          <span class="subject-tag subject-science">Biology</span>
-          <span class="subject-tag subject-science">English</span>
-        </div>
-        <div class="course-card-footer">
-          <a href="#how" class="course-card-link">Enroll Now →</a>
-        </div>
-      </div>
+    <div class="courses-grid" id="coursesGrid">
       <!-- 12th Arts -->
       <div class="course-card card-arts">
         <div class="course-card-icon">📜</div>
@@ -764,14 +731,12 @@
           Structured coaching for all Arts subjects. Concept clarity, essay writing, and analytical skills for Board excellence.
         </div>
         <div class="course-subjects">
-          <span class="subject-tag subject-arts">History</span>
           <span class="subject-tag subject-arts">Political Science</span>
           <span class="subject-tag subject-arts">Geography</span>
-          <span class="subject-tag subject-arts">Economics</span>
           <span class="subject-tag subject-arts">English</span>
         </div>
         <div class="course-card-footer">
-          <a href="#how" class="course-card-link">Enroll Now →</a>
+          <a href="payment-12.html" class="course-card-link">Enroll Now →</a>
         </div>
       </div>
       <!-- 10th -->
@@ -787,23 +752,33 @@
           <span class="subject-tag subject-ten">Science</span>
           <span class="subject-tag subject-ten">Social Science</span>
           <span class="subject-tag subject-ten">English</span>
-          <span class="subject-tag subject-ten">Hindi</span>
         </div>
         <div class="course-card-footer">
-          <a href="#how" class="course-card-link">Enroll Now →</a>
+          <a href="payment-10.html" class="course-card-link">Enroll Now →</a>
         </div>
       </div>
-    </div>
     <!-- Competitive exam coming soon -->
-    <div style="margin-top:28px;background:white;border-radius:14px;padding:24px 28px;border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-      <div style="display:flex;align-items:center;gap:16px;">
-        <span style="font-size:32px;">🏆</span>
-        <div>
-          <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:17px;color:var(--deep);margin-bottom:4px;">Competitive Exam Coaching</div>
-          <div style="font-size:13px;color:var(--text-muted);">JEE, NEET, and other competitive exams — coming soon to PRAJNANAM</div>
-        </div>
+    <div class="course-card card-arts">
+      <div class="course-card-icon">🏆</div>
+      <div class="course-card-class">Competitive</div>
+      <div class="course-card-title">
+        JEE / NEET<br/>Preparation Batch
       </div>
-      <span class="coming-badge">🔜 Coming Soon</span>
+
+      <div class="course-card-desc">
+        Comprehensive coaching for competitive exams like JEE and NEET. Structured syllabus, advanced problem solving, and expert guidance.
+      </div>
+
+      <div class="course-subjects">
+        <span class="subject-tag subject-arts">Physics</span>
+        <span class="subject-tag subject-arts">Chemistry</span>
+        <span class="subject-tag subject-arts">Mathematics</span>
+        <span class="subject-tag subject-arts">Biology</span>
+      </div>
+
+      <div class="course-card-footer">
+        <span class="coming-badge">🔜 Coming Soon</span>
+      </div>
     </div>
   </div>
 </section>
@@ -854,36 +829,32 @@
         Experienced educators dedicated to every student's success.
       </p>
     </div>
-    <div class="faculty-grid">
+    <div class="faculty-grid" id="facultyGrid">
       <div class="faculty-card">
         <div class="faculty-avatar">A</div>
         <div class="faculty-name">Arun Kumar Singh</div>
         <div class="faculty-role">Founder & Director</div>
         <div class="faculty-bio">With over 15 years of teaching experience, Arun Sir leads the institute with a passion for making quality education accessible to all.</div>
         <div class="faculty-tags">
-          <span class="faculty-tag">Mathematics</span>
-          <span class="faculty-tag">Physics</span>
+          <span class="faculty-tag">Geography</span>
         </div>
       </div>
       <div class="faculty-card">
         <div class="faculty-avatar" style="background:linear-gradient(135deg,#5B8DB8,#7EB3D8);">P</div>
         <div class="faculty-name">Priya Sharma</div>
-        <div class="faculty-role">Senior Faculty – Science</div>
-        <div class="faculty-bio">M.Sc. in Chemistry with 10+ years of coaching. Known for making complex concepts simple and exam-ready.</div>
+        <div class="faculty-role">Senior Faculty – Arts</div>
+        <div class="faculty-bio">MA in English with 10+ years of coaching. Known for making complex concepts simple and exam-ready.</div>
         <div class="faculty-tags">
-          <span class="faculty-tag">Chemistry</span>
-          <span class="faculty-tag">Biology</span>
+          <span class="faculty-tag">English</span>
         </div>
       </div>
       <div class="faculty-card">
         <div class="faculty-avatar" style="background:linear-gradient(135deg,#C9922A,#E8B94A);">R</div>
         <div class="faculty-name">Rajan Dey</div>
         <div class="faculty-role">Senior Faculty – Arts</div>
-        <div class="faculty-bio">MA in History and Political Science. Specializes in essay writing, map work, and analytical thinking for Board exams.</div>
+        <div class="faculty-bio">MA Political Science. Specializes in essay writing, map work, and analytical thinking for Board exams.</div>
         <div class="faculty-tags">
-          <span class="faculty-tag">History</span>
           <span class="faculty-tag">Political Science</span>
-          <span class="faculty-tag">Economics</span>
         </div>
       </div>
     </div>
@@ -916,6 +887,33 @@
         <div class="why-title">Affordable Fees</div>
         <div class="why-desc">Quality coaching at accessible prices. Transparent fee structure with online payment convenience.</div>
       </div>
+      <div class="why-card">
+      <div class="why-icon">❄️</div>
+      <div class="why-title">Air-Conditioned Classrooms</div>
+      <div class="why-desc">
+        Stay comfortable and focused with fully AC-enabled classrooms designed for long study hours.</div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon">🖥️</div>
+        <div class="why-title">High Resolution Displays</div>
+        <div class="why-desc">
+          Learn with crystal-clear visuals and smart boards for better understanding of concepts.</div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon">💡</div>
+        <div class="why-title">Modern Learning Setup</div>
+        <div class="why-desc">
+          Combination of traditional teaching with modern technology for better results.</div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon">🪑</div>
+        <div class="why-title">Comfortable Seating</div>
+        <div class="why-desc">
+          Ergonomic seating arrangement to ensure students can focus without discomfort.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -946,7 +944,6 @@
     <div>
       <div class="footer-h4">Courses</div>
       <ul class="footer-links">
-        <li><a href="#courses">Class 12 – Science</a></li>
         <li><a href="#courses">Class 12 – Arts</a></li>
         <li><a href="#courses">Class 10</a></li>
         <li><a href="#courses" style="color:var(--gold-light) !important;opacity:0.6;">Competitive (Coming Soon)</a></li>
@@ -958,7 +955,6 @@
         <li><a href="#about">About Us</a></li>
         <li><a href="#faculty">Faculty</a></li>
         <li><a href="#how">Admission Process</a></li>
-        <li><a href="login.html">Login</a></li>
       </ul>
     </div>
     <div>
@@ -966,22 +962,22 @@
 
   <div class="footer-contact-item">
     <span class="footer-contact-icon">📍</span>
-    [Institute Address], [City], [State]
+    <span data-contact="address">[Institute Address], [City], [State]</span>
   </div>
 
   <div class="footer-contact-item">
     <span class="footer-contact-icon">📧</span>
-    <a href="mailto:infoprajnanam@gmail.com">infoprajnanam@gmail.com</a>
+    <a href="mailto:infoprajnanam@gmail.com" data-contact="email">infoprajnanam@gmail.com</a>
   </div>
 
   <div class="footer-contact-item">
     <span class="footer-contact-icon">📞</span>
-    <a href="tel:+919876543210">+91 98765 43210</a>
+    <a href="tel:+919876543210" data-contact="phone">+91 98765 43210</a>
   </div>
 
   <div class="footer-contact-item">
     <span class="footer-contact-icon">⏰</span>
-    Mon–Sat: 8:00 AM – 7:00 PM
+    <span data-contact="hours">Mon–Sat: 8:00 AM – 7:00 PM</span>
   </div>
 </div>
 
@@ -1018,8 +1014,11 @@ window.addEventListener('scroll', () => {
 
   // Close mobile menu on link click
   document.querySelectorAll('.mobile-menu a').forEach(a => {
-    a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+  a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('active'); // ✅ THIS LINE FIXES IT
   });
+});
 
   // Scroll animations
   const observer = new IntersectionObserver((entries) => {
@@ -1037,6 +1036,127 @@ window.addEventListener('scroll', () => {
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(el);
   });
+
+  // Check if admin is logged in and update nav button
+fetch('/api/auth/check', { credentials: 'include', cache: 'no-store' })
+  .then(r => r.json())
+  .then(data => {
+    const btn = document.getElementById('navAuthBtn');
+    const mobileBtn = document.getElementById('mobileAuthBtn');
+    if (data.authenticated) {
+      btn.textContent = 'Dashboard';
+      btn.href = '/admin/admin-dashboard.html';
+      mobileBtn.textContent = 'Dashboard →';
+      mobileBtn.href = '/admin/admin-dashboard.html';
+    }
+    btn.style.visibility = 'visible'; // ← added
+  })
+  .catch(() => {
+    document.getElementById('navAuthBtn').style.visibility = 'visible'; // ← added
+  });
 </script>
+
+<script>
+// Load live contact details from DB
+fetch('/api/settings/contact')
+  .then(r => r.json())
+  .then(data => {
+    if (!data.success) return;
+    const d = data.data;
+
+    // Update every element that shows contact info
+    document.querySelectorAll('[data-contact="email"]').forEach(el => {
+      if (el.tagName === 'A') {
+        el.href = 'mailto:' + d.contact_email;
+        el.textContent = d.contact_email;
+      } else {
+        el.textContent = d.contact_email;
+      }
+    });
+    document.querySelectorAll('[data-contact="phone"]').forEach(el => {
+      if (el.tagName === 'A') {
+        el.href = 'tel:+91' + d.contact_phone;
+        el.textContent = '+91 ' + d.contact_phone.replace(/(\d{5})(\d{5})/, '$1 $2');
+      } else {
+        el.textContent = '+91 ' + d.contact_phone.replace(/(\d{5})(\d{5})/, '$1 $2');
+      }
+    });
+    document.querySelectorAll('[data-contact="address"]').forEach(el => {
+      el.textContent = d.contact_address;
+    });
+    document.querySelectorAll('[data-contact="hours"]').forEach(el => {
+      el.textContent = d.contact_hours;
+    });
+  })
+  .catch(() => {}); // silently fail — hardcoded fallbacks remain visible
+</script>
+
+<script>
+// Load courses dynamically from DB
+fetch('/api/courses')
+  .then(r => r.json())
+  .then(data => {
+    if (!data.success) return;
+    const grid = document.getElementById('coursesGrid');
+
+    const themeMap = {
+      arts: { card: 'card-arts', tag: 'subject-arts' },
+      ten:  { card: 'card-ten',  tag: 'subject-ten'  },
+      default: { card: 'card-arts', tag: 'subject-arts' }
+    };
+
+    grid.innerHTML = data.data.map(c => {
+      const t = themeMap[c.color_theme] || themeMap.default;
+      const subjects = c.subjects.map(s =>
+        `<span class="subject-tag ${t.tag}">${s.trim()}</span>`
+      ).join('');
+      return `
+        <div class="course-card ${t.card}">
+          <div class="course-card-icon">${c.icon}</div>
+          <div class="course-card-class">${c.class_label}</div>
+          <div class="course-card-title">${c.name}</div>
+          <div class="course-card-desc">${c.description || ''}</div>
+          <div class="course-subjects">${subjects}</div>
+          <div class="course-card-footer">
+            <a href="payment-${c.color_theme === 'ten' ? '10' : '12'}.html" class="course-card-link">Enroll Now →</a>
+          </div>
+        </div>`;
+    }).join('') + `
+      <div class="course-card card-arts">
+        <div class="course-card-icon">🏆</div>
+        <div class="course-card-class">Competitive</div>
+        <div class="course-card-title">JEE / NEET<br/>Preparation Batch</div>
+        <div class="course-card-desc">Comprehensive coaching for competitive exams. Structured syllabus, advanced problem solving, and expert guidance.</div>
+        <div class="course-subjects">
+          <span class="subject-tag subject-arts">Physics</span>
+          <span class="subject-tag subject-arts">Chemistry</span>
+          <span class="subject-tag subject-arts">Mathematics</span>
+          <span class="subject-tag subject-arts">Biology</span>
+        </div>
+        <div class="course-card-footer"><span class="coming-badge">🔜 Coming Soon</span></div>
+      </div>`;
+  })
+  .catch(() => {}); // static content remains as fallback
+</script>
+
+<script>
+fetch('/api/faculty')
+  .then(r => r.json())
+  .then(data => {
+    if (!data.success || !data.data.length) return;
+    document.getElementById('facultyGrid').innerHTML = data.data.map(f => `
+      <div class="faculty-card">
+        <div class="faculty-avatar" style="background:${f.color};">${f.name[0]}</div>
+        <div class="faculty-name">${f.name}</div>
+        <div class="faculty-role">${f.role}</div>
+        <div class="faculty-bio">${f.bio || ''}</div>
+        <div class="faculty-tags">
+          ${f.tags.map(t => `<span class="faculty-tag">${t.trim()}</span>`).join('')}
+        </div>
+      </div>`).join('');
+  })
+  .catch(() => {}); // static fallback stays if API fails
+</script>
+
 </body>
 </html>
